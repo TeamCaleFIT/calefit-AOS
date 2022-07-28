@@ -2,8 +2,6 @@ package com.example.calefit.ui.login
 
 import android.content.Context
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import com.example.calefit.R
 import com.example.calefit.databinding.ActivityLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
