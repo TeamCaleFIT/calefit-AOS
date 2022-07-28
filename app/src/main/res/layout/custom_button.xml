@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/custom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_oauth_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/oauth_login_logo"
+            app:layout_constraintStart_toStartOf="@id/custom_layout"
+            app:layout_constraintTop_toTopOf="@id/custom_layout" />
+
+        <TextView
+            style="@style/LoginTitle"
+            android:id="@+id/tv_login_button_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/custom_layout"
+            app:layout_constraintEnd_toEndOf="@id/custom_layout"
+            app:layout_constraintStart_toEndOf="@id/iv_oauth_logo"
+            app:layout_constraintTop_toTopOf="@id/custom_layout"
+            tools:text="테스트" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
