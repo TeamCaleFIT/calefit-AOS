@@ -10,6 +10,10 @@
         <variable
             name="item"
             type="com.example.calefit.data.CalendarDate.ItemDays" />
+
+        <variable
+            name="isClicked"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,7 +50,7 @@
             android:contentDescription="@string/show_circle"
             android:src="@drawable/date_background"
             android:visibility="invisible"
-            app:visible="@{item.clicked}" />
+            app:visible="@{isClicked}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

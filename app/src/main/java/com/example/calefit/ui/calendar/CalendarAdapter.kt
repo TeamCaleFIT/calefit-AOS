@@ -1,5 +1,6 @@
 package com.example.calefit.ui.calendar
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncDifferConfig
@@ -25,6 +26,13 @@ class CalendarAdapter(
 
             binding.clDay.setOnClickListener {
                 clickEvent(adapterPosition)
+            }
+        }
+
+        fun update(bundle: Bundle) {
+            if (bundle.containsKey(DONE)) {
+                val checked = bundle.getBoolean(DONE)
+                binding.isClicked = checked
             }
         }
     }
@@ -58,9 +66,25 @@ class CalendarAdapter(
         holder: RecyclerView.ViewHolder,
         position: Int,
     ) {
+        onBindViewHolder(holder, position, mutableListOf())
+    }
+
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: MutableList<Any>,
+    ) {
         val item = getItem(position)
         when (holder) {
-            is CalendarDayViewHolder -> holder.bind(item as CalendarDate.ItemDays)
+            is CalendarDayViewHolder -> {
+                if (payloads.isEmpty() || payloads[0] !is Bundle) {
+                    holder.bind(item as CalendarDate.ItemDays)
+                } else {
+                    val bundle = payloads[0] as Bundle
+                    holder.update(bundle)
+                }
+            }
+
             is CalendarDaysHeaderViewHolder -> holder.bind(item as CalendarDate.ItemHeader)
         }
     }
@@ -79,10 +103,12 @@ class CalendarAdapter(
             newItem: CalendarDate,
         ): Boolean {
             return if (oldItem is CalendarDate.ItemHeader
-                && newItem is CalendarDate.ItemHeader) {
+                && newItem is CalendarDate.ItemHeader
+            ) {
                 oldItem.dateIndicator == newItem.dateIndicator
             } else if (oldItem is CalendarDate.ItemDays
-                && newItem is CalendarDate.ItemDays) {
+                && newItem is CalendarDate.ItemDays
+            ) {
                 oldItem.id == newItem.id
             } else {
                 oldItem.hashCode() == newItem.hashCode()
@@ -93,10 +119,31 @@ class CalendarAdapter(
             oldItem: CalendarDate,
             newItem: CalendarDate,
         ) = oldItem == newItem
+
+        override fun getChangePayload(
+            oldItem: CalendarDate,
+            newItem: CalendarDate,
+        ): Any? {
+            if (oldItem is CalendarDate.ItemDays
+                && newItem is CalendarDate.ItemDays
+            ) {
+                if (oldItem.id == newItem.id) {
+                    return if (oldItem.isClicked == newItem.isClicked) {
+                        super.getChangePayload(oldItem, newItem)
+                    } else {
+                        val diff = Bundle()
+                        diff.putBoolean(DONE, newItem.isClicked)
+                        diff
+                    }
+                }
+            }
+            return super.getChangePayload(oldItem, newItem)
+        }
     }
 
     companion object {
         const val HEADER = 0
         const val DAY = 1
+        private const val DONE = "done"
     }
 }
