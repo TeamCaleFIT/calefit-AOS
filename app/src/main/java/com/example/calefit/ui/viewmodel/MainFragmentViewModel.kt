@@ -83,8 +83,8 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
         for (i in 1..42) {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 dayList.add(CalendarDate.ItemDays(
+                    id = i,
                     date = "",
-                    onSchedule = false
                 ))
             } else {
                 /**
@@ -92,8 +92,9 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
                  */
                 val day = (i - dayOfWeek).toString()
                 dayList.add(CalendarDate.ItemDays(
+                    id = i,
                     date = day,
-                    onSchedule = false
+                    isVisible = true,
                 ))
             }
         }

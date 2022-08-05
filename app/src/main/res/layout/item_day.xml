@@ -15,7 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_day"
         android:layout_width="40dp"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        app:visible="@{item.visible}">
 
         <TextView
             android:id="@+id/tv_day"
@@ -39,6 +40,7 @@
             app:visible="@{item.onSchedule}" />
 
         <ImageView
+            android:id="@+id/iv_circle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/show_circle"

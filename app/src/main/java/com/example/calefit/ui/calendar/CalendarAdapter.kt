@@ -2,6 +2,7 @@ package com.example.calefit.ui.calendar
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,9 @@ import com.example.calefit.databinding.ItemDayHeaderBinding
 
 class CalendarAdapter(
     private val clickEvent: (Int) -> Unit,
-) : ListAdapter<CalendarDate, RecyclerView.ViewHolder>(ItemDiffUtil) {
+) : ListAdapter<CalendarDate, RecyclerView.ViewHolder>(
+    AsyncDifferConfig.Builder(ItemDiffUtil).build()
+) {
 
     class CalendarDayViewHolder(
         val binding: ItemDayBinding,
@@ -19,10 +22,9 @@ class CalendarAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CalendarDate.ItemDays) {
             binding.item = item
-            if (item.date != "") {
-                binding.clDay.setOnClickListener {
-                    clickEvent(adapterPosition)
-                }
+
+            binding.clDay.setOnClickListener {
+                clickEvent(adapterPosition)
             }
         }
     }
@@ -79,7 +81,7 @@ class CalendarAdapter(
             return if (oldItem is CalendarDate.ItemHeader && newItem is CalendarDate.ItemHeader) {
                 oldItem.dateIndicator == newItem.dateIndicator
             } else if (oldItem is CalendarDate.ItemDays && newItem is CalendarDate.ItemDays) {
-                oldItem.date == newItem.date
+                oldItem.id == newItem.id
             } else {
                 oldItem.hashCode() == newItem.hashCode()
             }
