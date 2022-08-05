@@ -43,12 +43,12 @@ class CalendarAdapter(
     ): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
+            HEADER -> CalendarDaysHeaderViewHolder(
+                ItemDayHeaderBinding.inflate(inflater, parent, false)
+            )
             DAY -> CalendarDayViewHolder(
                 ItemDayBinding.inflate(inflater, parent, false),
                 clickEvent
-            )
-            HEADER -> CalendarDaysHeaderViewHolder(
-                ItemDayHeaderBinding.inflate(inflater, parent, false)
             )
             else -> throw IllegalArgumentException("Invalid viewType")
         }
@@ -78,9 +78,11 @@ class CalendarAdapter(
             oldItem: CalendarDate,
             newItem: CalendarDate,
         ): Boolean {
-            return if (oldItem is CalendarDate.ItemHeader && newItem is CalendarDate.ItemHeader) {
+            return if (oldItem is CalendarDate.ItemHeader
+                && newItem is CalendarDate.ItemHeader) {
                 oldItem.dateIndicator == newItem.dateIndicator
-            } else if (oldItem is CalendarDate.ItemDays && newItem is CalendarDate.ItemDays) {
+            } else if (oldItem is CalendarDate.ItemDays
+                && newItem is CalendarDate.ItemDays) {
                 oldItem.id == newItem.id
             } else {
                 oldItem.hashCode() == newItem.hashCode()

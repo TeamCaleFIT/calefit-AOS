@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.calefit.R
-import com.example.calefit.common.AutoClearedValue
 import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentMainBinding
@@ -53,7 +52,6 @@ class MainFragment : Fragment() {
 
         binding.rvCalendar.adapter = adapter
         binding.rvCalendar.layoutManager = manager
-//        binding.rvCalendar.itemAnimator = null
 
         observeCalendar()
         changeCalendar()
@@ -62,7 +60,6 @@ class MainFragment : Fragment() {
     private fun observeCalendar() {
         viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.month.collect {
-                Log.d("MainFragment", it.toString())
                 adapter.submitList(it)
             }
         }
