@@ -25,5 +25,21 @@
     <string name="password_signup_recheck">비밀번호 확인</string>
     <string name="user_nick_name">닉네임</string>
     <string name="signup_ok">회원가입</string>
+    <string name="user_email_zone">아이디를 입력해주세요</string>
+    <string name="not_validate_email_format">이메일 아이디 형식이 맞지 않습니다</string>
+    <string name="user_password_zone">비밀번호를 입력해 주세요</string>
+    <string name="user_password_not_match">비밀번호를 재 입력 해주세요</string>
+    <string name="user_password_diff">비밀번호가 일치하지 않습니다</string>
+    <string name="show_previous_month">show previous month</string>
+    <string name="show_next_month">show next month</string>
+    <string name="sunday">일</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+    <string name="workout_added_circle">workout added circle</string>
+    <string name="show_circle">show circle</string>
 
 </resources>
