@@ -30,8 +30,8 @@ class CalendarAdapter(
         }
 
         fun update(bundle: Bundle) {
-            if (bundle.containsKey(DONE)) {
-                val checked = bundle.getBoolean(DONE)
+            if (bundle.containsKey(CLICK)) {
+                val checked = bundle.getBoolean(CLICK)
                 binding.isClicked = checked
             }
         }
@@ -132,7 +132,7 @@ class CalendarAdapter(
                         super.getChangePayload(oldItem, newItem)
                     } else {
                         val diff = Bundle()
-                        diff.putBoolean(DONE, newItem.isClicked)
+                        diff.putBoolean(CLICK, newItem.isClicked)
                         diff
                     }
                 }
@@ -144,6 +144,6 @@ class CalendarAdapter(
     companion object {
         const val HEADER = 0
         const val DAY = 1
-        private const val DONE = "done"
+        private const val CLICK = "done"
     }
 }
