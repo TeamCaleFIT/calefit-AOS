@@ -7,18 +7,20 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentSignUpBinding
+import com.example.calefit.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SingUpFragment : Fragment() {
 
     private var binding by autoCleared<FragmentSignUpBinding>()
-
+    private val viewModel: LoginViewModel by activityViewModels()
     private var idFlag = false
     private var passwordFlag = false
     private var passwordCheckFlag = false
@@ -37,21 +39,23 @@ class SingUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
 
-        checkInfo()
-        signUpEmail(navController)
+        emailSignUpUserInfo()
+        goBackToLogin(navController)
     }
 
-    private fun checkInfo() {
+    private fun emailSignUpUserInfo() {
         with(binding) {
             idTextInputEditText.addTextChangedListener { userInput ->
                 if (userInput != null) {
                     when {
                         userInput.isEmpty() -> {
-                            binding.idTextInputLayout.error = "아이디를 입력해주세요"
+                            binding.idTextInputLayout.error =
+                                getString(R.string.user_email_zone)
                             idFlag = false
                         }
                         !checkEmailRegex(userInput.toString()) -> {
-                            binding.idTextInputLayout.error = "이메일 아이디 형식이 맞지 않습니다"
+                            binding.idTextInputLayout.error =
+                                getString(R.string.not_validate_email_format)
                             idFlag = false
                         }
                         else -> {
@@ -66,7 +70,8 @@ class SingUpFragment : Fragment() {
                 if (userInput != null) {
                     when {
                         userInput.isEmpty() -> {
-                            binding.passwordTextInputLayout.error = "비밀번호를 입력해 주세요"
+                            binding.passwordTextInputLayout.error =
+                                getString(R.string.user_password_zone)
                             passwordFlag = false
                         }
                         else -> {
@@ -81,13 +86,16 @@ class SingUpFragment : Fragment() {
                 if (userInput != null) {
                     when {
                         userInput.isEmpty() -> {
-                            binding.passwordRecheckTextInputLayout.error = "비밀번호를 재 입력 해주세요"
+                            binding.passwordRecheckTextInputLayout.error =
+                                getString(R.string.user_password_not_match)
                             passwordCheckFlag = false
                         }
                         binding.passwordRecheckTextInputEditText.text !=
                                 binding.passwordRecheckTextInputEditText.text
                                 || binding.passwordRecheckTextInputEditText.text.isNullOrEmpty() -> {
-                            binding.passwordRecheckTextInputLayout.error = "비밀번호가 일치하지 않습니다"
+
+                            binding.passwordRecheckTextInputLayout.error =
+                                getString(R.string.user_password_diff)
                             passwordCheckFlag = false
                         }
                         else -> {
@@ -110,7 +118,7 @@ class SingUpFragment : Fragment() {
         binding.btnSignUpOk.isEnabled = idFlag && passwordFlag && passwordCheckFlag
     }
 
-    private fun signUpEmail(navController: NavController) {
+    private fun goBackToLogin(navController: NavController) {
         binding.btnSignUpOk.setOnClickListener {
             navController.navigate(R.id.action_singUpFragment_to_loginFragment)
         }

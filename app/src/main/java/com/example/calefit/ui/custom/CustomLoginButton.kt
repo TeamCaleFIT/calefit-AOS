@@ -42,7 +42,6 @@ class CustomLoginButton(
 
     fun setButtonColor(@ColorRes colorId: Int) {
         val color = ContextCompat.getColor(context, colorId)
-        Log.d("CustomView", "color : ${colorId.toString()}, ${color.toString()}")
         val mode = BlendMode.DST_OVER
         changeColor(color, mode)
     }
