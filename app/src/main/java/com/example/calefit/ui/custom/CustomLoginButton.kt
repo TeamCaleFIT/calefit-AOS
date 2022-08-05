@@ -5,7 +5,6 @@ import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -49,9 +48,10 @@ class CustomLoginButton(
         changeColor(color, mode)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun changeColor(color: Int, mode: BlendMode) {
-        val drawable =
-            context.getDrawable(R.drawable.login_background)?.let { DrawableCompat.wrap(it) }
+        val drawable = ContextCompat.getDrawable(context, R.drawable.login_background)
+            ?.let { DrawableCompat.wrap(it) }
         drawable?.colorFilter = BlendModeColorFilter(color, mode)
         binding.customLayout.background = drawable
     }

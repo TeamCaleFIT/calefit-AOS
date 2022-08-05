@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.calefit.data.CalendarDate
 import com.example.calefit.databinding.ItemDayBinding
 import com.example.calefit.databinding.ItemDayHeaderBinding
-import java.lang.IllegalArgumentException
 
 class CalendarAdapter(
     private val clickEvent: (Int) -> Unit,

@@ -17,7 +17,6 @@ import com.example.calefit.databinding.FragmentMainBinding
 import com.example.calefit.ui.calendar.CalendarAdapter
 import com.example.calefit.ui.viewmodel.MainFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
