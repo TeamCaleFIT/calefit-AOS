@@ -3,11 +3,13 @@ package com.example.calefit.ui.custom
 import android.content.Context
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -40,6 +42,7 @@ class CustomLoginButton(
         binding.ivOauthLogo.setImageResource(logo)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     fun setButtonColor(@ColorRes colorId: Int) {
         val color = ContextCompat.getColor(context, colorId)
         val mode = BlendMode.DST_OVER

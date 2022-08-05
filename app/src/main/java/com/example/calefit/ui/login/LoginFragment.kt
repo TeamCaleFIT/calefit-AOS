@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentLoginBinding
 import com.example.calefit.ui.home.HomeActivity
+import com.example.calefit.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,6 +22,8 @@ import javax.inject.Inject
 class LoginFragment @Inject constructor() : Fragment() {
 
     private var binding by autoCleared<FragmentLoginBinding>()
+
+    private val viewModel: LoginViewModel by activityViewModels()
 
     private val intent: Intent by lazy {
         Intent(context, HomeActivity::class.java)
@@ -38,6 +42,7 @@ class LoginFragment @Inject constructor() : Fragment() {
         val navigationController = findNavController()
 
         gotoSignUp(navigationController)
+        gotoHomeActivity()
     }
 
     private fun gotoSignUp(navController: NavController) {
@@ -48,6 +53,15 @@ class LoginFragment @Inject constructor() : Fragment() {
             tvEmailSignUp.setOnClickListener {
                 navController.navigate(R.id.action_loginFragment_to_singUpFragment)
             }
+        }
+    }
+
+    /**
+     *This function will be changed when a server is connected
+     */
+    private fun gotoHomeActivity() {
+        binding.btnLogin.setOnClickListener {
+            startActivity(intent)
         }
     }
 }
