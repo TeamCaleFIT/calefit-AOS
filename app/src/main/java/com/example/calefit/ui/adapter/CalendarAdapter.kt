@@ -1,4 +1,4 @@
-package com.example.calefit.ui.calendar
+package com.example.calefit.ui.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater

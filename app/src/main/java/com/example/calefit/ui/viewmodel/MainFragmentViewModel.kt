@@ -1,7 +1,5 @@
 package com.example.calefit.ui.viewmodel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import com.example.calefit.data.CalendarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +11,6 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class MainFragmentViewModel @Inject constructor() : ViewModel() {
 
@@ -31,7 +28,7 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
         makeCalendar()
     }
 
-    fun changeBackgroundDate(position: Int) {
+    fun changeDateBackground(position: Int) {
         makeCalendar()
         _month.update { list ->
             val newList = list.toMutableList()

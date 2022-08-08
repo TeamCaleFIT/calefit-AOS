@@ -8,12 +8,4 @@
     </style>
 
     <style name="Theme.Calefit" parent="Base.Theme.Calefit" />
-
-    <style name="Theme.Splash" parent="Theme.SplashScreen" >
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/black</item>
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/app_logo_workout</item>
-        <item name="postSplashScreenTheme">@style/Base.Theme.Calefit</item>
-        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">1000</item>
-
-    </style>
 </resources>
