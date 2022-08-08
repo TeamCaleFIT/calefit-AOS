@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">calefit</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="app_title">CaleFit</string>
+    <string name="enter_password">비밀번호를 입력해 주세요</string>
+    <string name="enter_email">이메일을 입력해주세요</string>
+    <string name="app_login">로그인</string>
+    <string name="oauth_login">OAuth Login</string>
+    <string name="oauth_login_logo">oauth login logo</string>
+    <string name="kakao_login_title">카카오로 시작하기</string>
+    <string name="naver_login_title">네이버로 시작하기</string>
+    <string name="google_login_title">구글로 시작하기</string>
+    <string name="sign_up_email">이메일 가입하기</string>
+    <string name="password">비밀번호</string>
+    <string name="password_recheck">비밀번호 재입력</string>
+    <string name="label_nick_name">닉네임 입력하기</string>
+    <string name="id_hint">id@example.com</string>
+    <string name="email_address">이메일 주소</string>
+    <string name="password_signup">비밀번호</string>
+    <string name="password_signup_recheck">비밀번호 확인</string>
+    <string name="user_nick_name">닉네임</string>
+    <string name="signup_ok">회원가입</string>
+    <string name="user_email_zone">아이디를 입력해주세요</string>
+    <string name="not_validate_email_format">이메일 아이디 형식이 맞지 않습니다</string>
+    <string name="user_password_zone">비밀번호를 입력해 주세요</string>
+    <string name="user_password_not_match">비밀번호를 재 입력 해주세요</string>
+    <string name="user_password_diff">비밀번호가 일치하지 않습니다</string>
+    <string name="show_previous_month">show previous month</string>
+    <string name="show_next_month">show next month</string>
+    <string name="sunday">일</string>
+    <string name="monday">월</string>
+    <string name="tuesday">화</string>
+    <string name="wednesday">수</string>
+    <string name="thursday">목</string>
+    <string name="friday">금</string>
+    <string name="saturday">토</string>
+    <string name="workout_added_circle">workout added circle</string>
+    <string name="show_circle">show circle</string>
+
+</resources>

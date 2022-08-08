@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="yellow_kakao">#FAE100</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green_naver">#2DB400</color>
+    <color name="gray1">#c1c1c1</color>
+    <color name="gray2">#3d3d3d</color>
+    <color name="snow">#fffafa</color>
+    <color name="blue_google">#4285F4</color>
+    <color name="gray3">#cccccc</color>
+</resources>

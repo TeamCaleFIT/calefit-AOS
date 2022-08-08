@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="LoginTitle" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>
