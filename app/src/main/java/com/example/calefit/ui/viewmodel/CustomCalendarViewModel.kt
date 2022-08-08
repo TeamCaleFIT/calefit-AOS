@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
-class MainFragmentViewModel @Inject constructor() : ViewModel() {
+class CustomCalendarViewModel @Inject constructor() : ViewModel() {
 
     private var _selectedDate = LocalDate.now()
 
@@ -84,9 +84,7 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
                     date = "",
                 ))
             } else {
-                /**
-                 * server data will be inserted into the list
-                 */
+                //TODO server data will be added in this section
                 val day = (i - dayOfWeek).toString()
                 dayList.add(CalendarDate.ItemDays(
                     id = i,
