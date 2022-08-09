@@ -27,7 +27,6 @@
         </activity>
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="true"
             android:theme="@style/Base.Theme.Calefit">
 
         </activity>

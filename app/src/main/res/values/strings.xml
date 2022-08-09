@@ -43,5 +43,7 @@
     <string name="show_circle">show circle</string>
     <string name="today_exercise_list">일지 작성하기</string>
     <string name="exercise_rv_title">Exercise</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
