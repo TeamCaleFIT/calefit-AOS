@@ -45,5 +45,9 @@
     <string name="exercise_rv_title">Exercise</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_home">홈</string>
+    <string name="nav_record">기록</string>
+    <string name="nav_community">커뮤니티</string>
+    <string name="nav_personal">정보</string>
 
 </resources>

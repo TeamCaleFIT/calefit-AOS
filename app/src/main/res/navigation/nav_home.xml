@@ -10,4 +10,19 @@
         android:name="com.example.calefit.ui.home.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.example.calefit.ui.community.CommunityFragment"
+        android:label="fragment_community"
+        tools:layout="@layout/fragment_community" />
+    <fragment
+        android:id="@+id/recordFragment"
+        android:name="com.example.calefit.ui.record.RecordFragment"
+        android:label="fragment_record"
+        tools:layout="@layout/fragment_record" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.calefit.ui.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>
