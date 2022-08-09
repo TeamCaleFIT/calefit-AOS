@@ -8,6 +8,7 @@ sealed class CalendarDate {
         val onSchedule: Boolean = false,
         val isClicked: Boolean = false,
         val isVisible: Boolean = false,
+        val isToday: Boolean = false,
     ) : CalendarDate()
 
     data class ItemHeader(

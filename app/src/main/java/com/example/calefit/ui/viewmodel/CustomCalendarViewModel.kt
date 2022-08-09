@@ -24,6 +24,9 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
     private val _month = MutableStateFlow<List<CalendarDate>>(listOf())
     val month = _month.asStateFlow()
 
+    private val _date = MutableStateFlow("10")
+    val date = _date.asStateFlow()
+
     init {
         makeCalendar()
     }
@@ -32,9 +35,12 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         makeCalendar()
         _month.update { list ->
             val newList = list.toMutableList()
+            check(list[position] is CalendarDate.ItemDays)
             val data = list[position] as CalendarDate.ItemDays
             val newData = data.copy(isClicked = true)
+            check(newData.isClicked)
             newList[position] = newData
+            _date.value = newData.date
             newList
         }
     }
@@ -48,7 +54,6 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         _selectedDate = _selectedDate.plusMonths(1)
         makeCalendar()
     }
-
 
     private fun makeCalendar() {
         val list = mutableListOf<CalendarDate>()
@@ -74,6 +79,7 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         val daysInMonth = yearMonth.lengthOfMonth()
         val firstOfMonth = selectedDate.withDayOfMonth(1)
         val dayOfWeek = firstOfMonth.dayOfWeek.value
+        val today = selectedDate.dayOfMonth
 
         val dayList = mutableListOf<CalendarDate>()
 
@@ -86,13 +92,26 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
             } else {
                 //TODO server data will be added in this section
                 val day = (i - dayOfWeek).toString()
-                dayList.add(CalendarDate.ItemDays(
-                    id = i,
-                    date = day,
-                    isVisible = true,
-                ))
+
+                //TODO today year, month, day should be compared by the date of the calendar
+                if (day == today.toString()) {
+                    dayList.add(CalendarDate.ItemDays(
+                        id = i,
+                        date = day,
+                        isVisible = true,
+                        isToday = true,
+                    ))
+                } else {
+                    dayList.add(CalendarDate.ItemDays(
+                        id = i,
+                        date = day,
+                        isVisible = true,
+                    ))
+                }
             }
         }
+
+        check(dayList.isNotEmpty())
         return dayList
     }
 
@@ -100,4 +119,5 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         val formatter = DateTimeFormatter.ofPattern("MM월")
         _monthName.value = _selectedDate.format(formatter)
     }
+
 }
