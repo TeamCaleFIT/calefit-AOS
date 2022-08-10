@@ -18,6 +18,7 @@
             android:name=".ui.login.LoginActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +28,7 @@
         </activity>
         <activity
             android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.Calefit">
 
         </activity>
