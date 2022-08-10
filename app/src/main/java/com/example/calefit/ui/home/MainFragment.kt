@@ -12,10 +12,8 @@ import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentMainBinding
 import com.example.calefit.ui.adapter.ExerciseListAdapter
-import com.example.calefit.ui.viewmodel.CustomCalendarViewModel
 import com.example.calefit.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 
 @AndroidEntryPoint
@@ -41,12 +39,32 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.hasSchedule = true
 
+        binding.rvExerciseDetail.adapter = exerciseAdapter
+        binding.rvExerciseDetail.itemAnimator = null
+
+        getDate()
+        observeData()
+    }
+
+    private fun getDate() {
         binding.cvCustom.getClickedDate()?.let { flow ->
             viewLifecycleOwner.repeatOnLifecycleExtension {
                 flow.collect {
                     viewModel.setDate(it)
+                }
+            }
+        }
+    }
+
+    private fun observeData() {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.exerciseList.collect {
+                if (it[0].name.isEmpty()) {
+                    binding.hasSchedule = false
+                } else {
+                    binding.hasSchedule = true
+                    exerciseAdapter.submitList(it)
                 }
             }
         }
