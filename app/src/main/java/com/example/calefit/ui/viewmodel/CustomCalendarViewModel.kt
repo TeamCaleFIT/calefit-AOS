@@ -1,8 +1,15 @@
 package com.example.calefit.ui.viewmodel
 
+import android.app.Application
+import android.content.Context
+import android.content.res.Resources
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import com.example.calefit.R
 import com.example.calefit.data.CalendarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,9 +19,13 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
-class CustomCalendarViewModel @Inject constructor() : ViewModel() {
+class CustomCalendarViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+) : ViewModel() {
 
-    private var _selectedDate = LocalDate.now()
+    private val _todayDate = LocalDate.now()
+
+    private var _selectedDate = _todayDate
 
     private val _dayHeader = mutableListOf("일", "월", "화", "수", "목", "금", "토")
 
@@ -24,7 +35,7 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
     private val _month = MutableStateFlow<List<CalendarDate>>(listOf())
     val month = _month.asStateFlow()
 
-    private val _date = MutableStateFlow("10")
+    private val _date = MutableStateFlow(_todayDate.toString())
     val date = _date.asStateFlow()
 
     init {
@@ -35,10 +46,10 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         makeCalendar()
         _month.update { list ->
             val newList = list.toMutableList()
-            check(list[position] is CalendarDate.ItemDays)
+            require(list[position] is CalendarDate.ItemDays)
             val data = list[position] as CalendarDate.ItemDays
             val newData = data.copy(isClicked = true)
-            check(newData.isClicked)
+            require(newData.isClicked)
             newList[position] = newData
             _date.value = newData.date
             newList
@@ -79,7 +90,12 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         val daysInMonth = yearMonth.lengthOfMonth()
         val firstOfMonth = selectedDate.withDayOfMonth(1)
         val dayOfWeek = firstOfMonth.dayOfWeek.value
-        val today = selectedDate.dayOfMonth
+        val selectedYear = selectedDate.year
+        val selectedMonth = selectedDate.month.value
+        val year = _todayDate.year
+        val month = _todayDate.month.value
+        val today = _todayDate.dayOfMonth
+        val formatter = context.getString(R.string.year_month_day_format)
 
         val dayList = mutableListOf<CalendarDate>()
 
@@ -87,31 +103,36 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 dayList.add(CalendarDate.ItemDays(
                     id = i,
-                    date = "",
+                    day = "",
                 ))
             } else {
                 //TODO server data will be added in this section
                 val day = (i - dayOfWeek).toString()
 
-                //TODO today year, month, day should be compared by the date of the calendar
-                if (day == today.toString()) {
+                // today year, month, day should be compared by the date of the calendar
+                if (selectedYear == year
+                    && selectedMonth == month
+                    && day == today.toString()
+                ) {
                     dayList.add(CalendarDate.ItemDays(
                         id = i,
-                        date = day,
+                        day = day,
+                        date = formatter.format(selectedYear, selectedMonth, day.toInt()),
                         isVisible = true,
                         isToday = true,
                     ))
                 } else {
                     dayList.add(CalendarDate.ItemDays(
                         id = i,
-                        date = day,
+                        day = day,
+                        date = formatter.format(selectedYear, selectedMonth, day.toInt()),
                         isVisible = true,
                     ))
                 }
             }
         }
 
-        check(dayList.isNotEmpty())
+        require(dayList.isNotEmpty())
         return dayList
     }
 
@@ -119,5 +140,4 @@ class CustomCalendarViewModel @Inject constructor() : ViewModel() {
         val formatter = DateTimeFormatter.ofPattern("MM월")
         _monthName.value = _selectedDate.format(formatter)
     }
-
 }

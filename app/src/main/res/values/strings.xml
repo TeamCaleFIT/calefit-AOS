@@ -49,5 +49,7 @@
     <string name="nav_record">기록</string>
     <string name="nav_community">커뮤니티</string>
     <string name="nav_personal">정보</string>
+    <string name="year_month_day_format">%s-%02d-%02d</string>
+    <string name="name_cycle">%s %s</string>
 
 </resources>
