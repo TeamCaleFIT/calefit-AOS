@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.calefit"
-        minSdk 21
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -85,4 +85,8 @@ dependencies {
 
     //leak Canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+
+    //navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
 }

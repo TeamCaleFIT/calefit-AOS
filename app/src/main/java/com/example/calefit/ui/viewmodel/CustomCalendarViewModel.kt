@@ -1,10 +1,15 @@
 package com.example.calefit.ui.viewmodel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import android.app.Application
+import android.content.Context
+import android.content.res.Resources
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import com.example.calefit.R
 import com.example.calefit.data.CalendarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,11 +18,14 @@ import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
-class MainFragmentViewModel @Inject constructor() : ViewModel() {
+class CustomCalendarViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+) : ViewModel() {
 
-    private var _selectedDate = LocalDate.now()
+    private val _todayDate = LocalDate.now()
+
+    private var _selectedDate = _todayDate
 
     private val _dayHeader = mutableListOf("일", "월", "화", "수", "목", "금", "토")
 
@@ -27,17 +35,23 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
     private val _month = MutableStateFlow<List<CalendarDate>>(listOf())
     val month = _month.asStateFlow()
 
+    private val _date = MutableStateFlow(_todayDate.toString())
+    val date = _date.asStateFlow()
+
     init {
         makeCalendar()
     }
 
-    fun changeBackgroundDate(position: Int) {
+    fun changeDateBackground(position: Int) {
         makeCalendar()
         _month.update { list ->
             val newList = list.toMutableList()
+            require(list[position] is CalendarDate.ItemDays)
             val data = list[position] as CalendarDate.ItemDays
             val newData = data.copy(isClicked = true)
+            require(newData.isClicked)
             newList[position] = newData
+            _date.value = newData.date
             newList
         }
     }
@@ -51,7 +65,6 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
         _selectedDate = _selectedDate.plusMonths(1)
         makeCalendar()
     }
-
 
     private fun makeCalendar() {
         val list = mutableListOf<CalendarDate>()
@@ -77,6 +90,12 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
         val daysInMonth = yearMonth.lengthOfMonth()
         val firstOfMonth = selectedDate.withDayOfMonth(1)
         val dayOfWeek = firstOfMonth.dayOfWeek.value
+        val selectedYear = selectedDate.year
+        val selectedMonth = selectedDate.month.value
+        val year = _todayDate.year
+        val month = _todayDate.month.value
+        val today = _todayDate.dayOfMonth
+        val formatter = context.getString(R.string.year_month_day_format)
 
         val dayList = mutableListOf<CalendarDate>()
 
@@ -84,20 +103,36 @@ class MainFragmentViewModel @Inject constructor() : ViewModel() {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 dayList.add(CalendarDate.ItemDays(
                     id = i,
-                    date = "",
+                    day = "",
                 ))
             } else {
-                /**
-                 * server data will be inserted into the list
-                 */
+                //TODO server data will be added in this section
                 val day = (i - dayOfWeek).toString()
-                dayList.add(CalendarDate.ItemDays(
-                    id = i,
-                    date = day,
-                    isVisible = true,
-                ))
+
+                // today year, month, day should be compared by the date of the calendar
+                if (selectedYear == year
+                    && selectedMonth == month
+                    && day == today.toString()
+                ) {
+                    dayList.add(CalendarDate.ItemDays(
+                        id = i,
+                        day = day,
+                        date = formatter.format(selectedYear, selectedMonth, day.toInt()),
+                        isVisible = true,
+                        isToday = true,
+                    ))
+                } else {
+                    dayList.add(CalendarDate.ItemDays(
+                        id = i,
+                        day = day,
+                        date = formatter.format(selectedYear, selectedMonth, day.toInt()),
+                        isVisible = true,
+                    ))
+                }
             }
         }
+
+        require(dayList.isNotEmpty())
         return dayList
     }
 

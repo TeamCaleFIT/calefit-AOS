@@ -7,7 +7,10 @@
     <color name="green_naver">#2DB400</color>
     <color name="gray1">#c1c1c1</color>
     <color name="gray2">#3d3d3d</color>
+    <color name="gray4">#ebecf0</color>
     <color name="snow">#fffafa</color>
     <color name="blue_google">#4285F4</color>
     <color name="gray3">#cccccc</color>
+    <color name="gradient1Start">#2F80ED</color>
+    <color name="gradient1End">#B2FFDA</color>
 </resources>

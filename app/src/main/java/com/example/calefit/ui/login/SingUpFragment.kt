@@ -90,7 +90,7 @@ class SingUpFragment : Fragment() {
                                 getString(R.string.user_password_not_match)
                             passwordCheckFlag = false
                         }
-                        binding.passwordRecheckTextInputEditText.text !=
+                        binding.passwordTextInputEditText.text !=
                                 binding.passwordRecheckTextInputEditText.text
                                 || binding.passwordRecheckTextInputEditText.text.isNullOrEmpty() -> {
 

@@ -1,4 +1,4 @@
-package com.example.calefit.ui.calendar
+package com.example.calefit.ui.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,8 +31,8 @@ class CalendarAdapter(
 
         fun update(bundle: Bundle) {
             if (bundle.containsKey(CLICK)) {
-                val checked = bundle.getBoolean(CLICK)
-                binding.isClicked = checked
+                val checked = bundle.getSerializable(CLICK) as CalendarDate.ItemDays
+                binding.item = checked
             }
         }
     }
@@ -132,7 +132,7 @@ class CalendarAdapter(
                         super.getChangePayload(oldItem, newItem)
                     } else {
                         val diff = Bundle()
-                        diff.putBoolean(CLICK, newItem.isClicked)
+                        diff.putSerializable(CLICK, newItem)
                         diff
                     }
                 }

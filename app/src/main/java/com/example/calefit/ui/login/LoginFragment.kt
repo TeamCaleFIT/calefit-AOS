@@ -33,7 +33,8 @@ class LoginFragment @Inject constructor() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         return binding.root
     }
 
@@ -47,9 +48,6 @@ class LoginFragment @Inject constructor() : Fragment() {
 
     private fun gotoSignUp(navController: NavController) {
         with(binding) {
-            btnLogin.setOnClickListener {
-                startActivity(intent)
-            }
             tvEmailSignUp.setOnClickListener {
                 navController.navigate(R.id.action_loginFragment_to_singUpFragment)
             }
@@ -62,6 +60,7 @@ class LoginFragment @Inject constructor() : Fragment() {
     private fun gotoHomeActivity() {
         binding.btnLogin.setOnClickListener {
             startActivity(intent)
+            activity?.finish()
         }
     }
 }
