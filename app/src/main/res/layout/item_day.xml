@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.example.calefit.R" />
+
         <variable
             name="item"
             type="com.example.calefit.data.CalendarDate.ItemDays" />
@@ -14,7 +16,7 @@
         android:id="@+id/cl_day"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:iconBackground="@{item.today}"
+        android:background="@{item.today ? @drawable/today_background : null}"
         app:visible="@{item.visible}">
 
         <TextView

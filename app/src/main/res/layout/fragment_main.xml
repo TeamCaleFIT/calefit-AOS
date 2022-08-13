@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cv_custom"
                 app:visible="@{hasSchedule}" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.example.calefit.ui.custom.AutoClearRecyclerView
                 android:id="@+id/rv_exercise_detail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
