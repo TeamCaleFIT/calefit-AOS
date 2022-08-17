@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/template_background">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_template_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/template_title_icon"
+            android:src="@drawable/ic_baseline_layers_24"
+            app:layout_constraintEnd_toStartOf="@id/tv_exercise_template_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/charcoal" />
+
+        <TextView
+            android:id="@+id/tv_exercise_template_title"
+            style="@style/ExercisePlanTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="템플릿1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/template_exercise_list_count"
+            android:src="@drawable/ic_baseline_flag_24"
+            app:layout_constraintEnd_toStartOf="@id/tv_exercise_count"
+            app:layout_constraintTop_toBottomOf="@id/iv_template_icon"
+            app:tint="@color/gray3" />
+
+        <TextView
+            android:id="@+id/tv_exercise_count"
+            style="@style/ExerciseListBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_template_title"
+            tools:text="운동종목 7개" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_count" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
