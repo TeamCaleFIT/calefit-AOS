@@ -25,11 +25,13 @@
                 android:id="@+id/cv_custom"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_make_exercise_list"
                 style="@style/ButtonBold"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
