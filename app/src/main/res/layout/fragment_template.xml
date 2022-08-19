@@ -10,9 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.template.TemplateFragment">
+        tools:context=".ui.home.template.TemplateFragment">
 
-        <ExpandableListView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_exercise_template"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -20,6 +20,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="3"
             tools:listitem="@layout/item_exercise_template" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

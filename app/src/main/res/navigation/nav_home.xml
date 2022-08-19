@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/plannerFragment"
-        android:name="com.example.calefit.ui.planner.PlannerFragment"
+        android:name="com.example.calefit.ui.home.planner.PlannerFragment"
         android:label="PlannerFragment"
         tools:layout="@layout/fragment_planner">
         <action
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/exerciseSelectFragment"
-        android:name="com.example.calefit.ui.select.ExerciseSelectFragment"
+        android:name="com.example.calefit.ui.home.select.ExerciseSelectFragment"
         android:label="ExerciseSelectFragment"
         tools:layout="@layout/fragment_exercise_select">
         <action
@@ -60,12 +60,24 @@
     </fragment>
     <fragment
         android:id="@+id/templateFragment"
-        android:name="com.example.calefit.ui.template.TemplateFragment"
+        android:name="com.example.calefit.ui.home.template.TemplateFragment"
         android:label="TemplateFragment"
-        tools:layout="@layout/fragment_template" >
+        tools:layout="@layout/fragment_template">
         <action
             android:id="@+id/action_templateFragment_to_plannerFragment"
             app:destination="@id/plannerFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_templateFragment_to_exerciseDetailFragment"
+            app:destination="@id/exerciseDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseDetailFragment"
+        android:name="com.example.calefit.ui.home.detali.ExerciseDetailFragment"
+        android:label="ExerciseDetailFragment"
+        tools:layout="@layout/fragment_exercise_detail" >
+        <action
+            android:id="@+id/action_exerciseDetailFragment_to_exerciseSelectFragment"
+            app:destination="@id/exerciseSelectFragment" />
     </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.calefit.ui.template
+package com.example.calefit.ui.home.planner
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,20 +8,24 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
-import com.example.calefit.databinding.FragmentTemplateBinding
+import com.example.calefit.databinding.FragmentPlannerBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TemplateFragment : Fragment() {
+class PlannerFragment : Fragment() {
 
-    private var binding by autoCleared<FragmentTemplateBinding>()
+    private var binding by autoCleared<FragmentPlannerBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_template, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_planner, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }
