@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.example.calefit.data.ExerciseList.Cycle" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,13 +15,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginStart="16dp"
             android:id="@+id/tv_cycle_number"
             style="@style/ExerciseListBody"
-            android:textSize="24sp"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:gravity="center"
+            android:text="@{@string/cycle_counts_format(item.id)}"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,9 +33,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             app:errorEnabled="true"
             app:hintEnabled="false"
-            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_cycle_number"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,9 +47,9 @@
                 android:layout_height="40dp"
                 android:background="@drawable/edit_text_background"
                 android:gravity="end|center_vertical"
-                android:hint="@string/edit_cycle"
                 android:inputType="number"
-                android:lines="1" />
+                android:lines="1"
+                android:text="@{item.cycle}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -67,9 +71,9 @@
                 android:layout_height="40dp"
                 android:background="@drawable/edit_text_background"
                 android:gravity="end|center_vertical"
-                android:hint="@string/edit_weight"
                 android:inputType="number"
-                android:lines="1" />
+                android:lines="1"
+                android:text="@{item.weight}" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,20 +17,23 @@ class ExerciseRepositoryImpl @Inject constructor(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "스쿼트",
-                    cycle = "3회",
-                    weight = "100kg"
+                    cycleList = listOf(
+                        ExerciseList.Cycle("1", 3, 30)
+                    ),
                 ),
                 ExerciseList.Exercise(
                     id = "2",
                     name = "덤벨",
-                    cycle = "10회",
-                    weight = "40kg"
+                    cycleList = listOf(
+                        ExerciseList.Cycle("1", 2, 100)
+                    )
                 ),
                 ExerciseList.Exercise(
                     id = "3",
                     name = "벤치프레스",
-                    cycle = "5회",
-                    weight = "120kg"
+                    cycleList = listOf(
+                        ExerciseList.Cycle("1", 5, 400)
+                    )
                 )
             )
         ),
@@ -40,12 +43,15 @@ class ExerciseRepositoryImpl @Inject constructor(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "런지",
-                    cycle = "5회",
-                    weight = "20kg"
+                    cycleList = listOf(
+                        ExerciseList.Cycle("1", 3, 320)
+                    )
                 )
             )
         )
     )
+
+
 
     override fun getExerciseListOrError(): Aggregate<HashMap<String, List<ExerciseList.Exercise>>> {
         return if (exerciseList.isNotEmpty()) {

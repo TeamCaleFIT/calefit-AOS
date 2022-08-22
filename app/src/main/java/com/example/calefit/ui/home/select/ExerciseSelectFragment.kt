@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentExerciseSelectBinding
@@ -23,5 +24,13 @@ class ExerciseSelectFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_exercise_select, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnExerciseSelect.setOnClickListener {
+
+        }
     }
 }

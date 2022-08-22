@@ -5,18 +5,21 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.example.calefit.data.ExerciseList.Exercise" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/exercise_cycle_all_background">
 
         <TextView
             android:id="@+id/tv_exercise_title"
             style="@style/ExercisePlanTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="레그프래스" />
@@ -78,7 +81,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="@color/gray2"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_cycle_add" />
