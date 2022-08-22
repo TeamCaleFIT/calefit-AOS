@@ -53,9 +53,7 @@ class LoginFragment @Inject constructor() : Fragment() {
         }
     }
 
-    /**
-     *This function will be changed when a server is connected
-     */
+    // TODO change function as if the server allows login
     private fun gotoHomeActivity() {
         binding.btnLogin.setOnClickListener {
             startActivity(intent)
