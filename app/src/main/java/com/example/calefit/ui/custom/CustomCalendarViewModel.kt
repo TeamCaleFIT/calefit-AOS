@@ -1,4 +1,4 @@
-package com.example.calefit.ui.viewmodel
+package com.example.calefit.ui.custom
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

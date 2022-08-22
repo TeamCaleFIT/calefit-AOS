@@ -1,7 +1,6 @@
 package com.example.calefit.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentMainBinding
 import com.example.calefit.ui.adapter.ExerciseListAdapter
-import com.example.calefit.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

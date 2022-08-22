@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.calefit.ui.viewmodel.CustomCalendarViewModel" />
+            type="com.example.calefit.ui.custom.CustomCalendarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

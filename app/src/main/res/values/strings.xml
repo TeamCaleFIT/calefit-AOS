@@ -48,7 +48,7 @@
     <string name="nav_community">커뮤니티</string>
     <string name="nav_personal">정보</string>
     <string name="year_month_day_format">%s-%02d-%02d</string>
-    <string name="name_cycle">%s %s</string>
+    <string name="name_cycle">%s %d</string>
     <string name="plan_exercise_cycle">운동 계획 작성하기</string>
     <string name="save_exercise_list">저장하기</string>
     <string name="load_exercise_list">템플릿 불러오기</string>
@@ -64,5 +64,6 @@
     <string name="cycle_add">세트추가</string>
     <string name="select_exercise">선택하기</string>
     <string name="add_extra_exercise">운동 추가하기</string>
+    <string name="cycle_counts_format">%s 세트</string>
 
 </resources>

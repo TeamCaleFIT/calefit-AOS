@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentSignUpBinding
-import com.example.calefit.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

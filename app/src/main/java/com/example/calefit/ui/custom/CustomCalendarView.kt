@@ -12,7 +12,6 @@ import com.example.calefit.R
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.CustomCalendarViewBinding
 import com.example.calefit.ui.adapter.CalendarAdapter
-import com.example.calefit.ui.viewmodel.CustomCalendarViewModel
 import kotlinx.coroutines.flow.Flow
 
 class CustomCalendarView(
