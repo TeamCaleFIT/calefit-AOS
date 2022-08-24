@@ -65,5 +65,8 @@
     <string name="select_exercise">선택하기</string>
     <string name="add_extra_exercise">운동 추가하기</string>
     <string name="cycle_counts_format">%s 세트</string>
+    <string name="cycle_weight_name">중량 </string>
+    <string name="cycle_count_name">횟수 </string>
+    <string name="edit_exercise">편집하기</string>
 
 </resources>

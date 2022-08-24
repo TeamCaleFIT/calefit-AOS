@@ -2,7 +2,7 @@
 <resources>
 
     <style name="TextLabel" parent="TextAppearance.Design.Hint">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="LoginTitle" parent="TextAppearance.AppCompat.Body1">
@@ -33,6 +33,11 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AccentButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/gray2</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
 </resources>

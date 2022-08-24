@@ -13,7 +13,7 @@ import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentMainBinding
-import com.example.calefit.ui.adapter.ExerciseListAdapter
+import com.example.calefit.ui.adapter.ExerciseDailyDetailListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
 
     private val exerciseAdapter by lazy {
-        ExerciseListAdapter()
+        ExerciseDailyDetailListAdapter()
     }
 
     override fun onCreateView(

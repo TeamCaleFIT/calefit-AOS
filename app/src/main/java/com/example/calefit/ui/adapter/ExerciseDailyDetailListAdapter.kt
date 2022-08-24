@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.databinding.ItemTodayExerciseBinding
 
-class ExerciseListAdapter :
-    ListAdapter<ExerciseList.Exercise, ExerciseListAdapter.ExerciseListViewHolder>(
+class ExerciseDailyDetailListAdapter :
+    ListAdapter<ExerciseList.Exercise, ExerciseDailyDetailListAdapter.ExerciseListViewHolder>(
         AsyncDifferConfig.Builder(ItemDiffUtil).build()
     ) {
 
