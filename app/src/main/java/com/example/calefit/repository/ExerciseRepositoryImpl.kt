@@ -18,21 +18,21 @@ class ExerciseRepositoryImpl @Inject constructor(
                     id = "1",
                     name = "스쿼트",
                     cycleList = listOf(
-                        ExerciseList.Cycle("1", 3, 30)
+                        ExerciseList.Cycle("1", "3", "30")
                     ),
                 ),
                 ExerciseList.Exercise(
                     id = "2",
                     name = "덤벨",
                     cycleList = listOf(
-                        ExerciseList.Cycle("1", 2, 100)
+                        ExerciseList.Cycle("1", "2", "100")
                     )
                 ),
                 ExerciseList.Exercise(
                     id = "3",
                     name = "벤치프레스",
                     cycleList = listOf(
-                        ExerciseList.Cycle("1", 5, 400)
+                        ExerciseList.Cycle("1", "5", "400")
                     )
                 )
             )
@@ -44,7 +44,7 @@ class ExerciseRepositoryImpl @Inject constructor(
                     id = "1",
                     name = "런지",
                     cycleList = listOf(
-                        ExerciseList.Cycle("1", 3, 320)
+                        ExerciseList.Cycle("1", "3", "320")
                     )
                 )
             )
