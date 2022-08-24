@@ -17,28 +17,30 @@
 
         <TextView
             android:id="@+id/tv_exercise_title"
-            style="@style/ExercisePlanTitle"
+            style="@style/ExercisePlanBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{item.name}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="레그프래스" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_exercise_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:padding="4dp"
             android:src="@drawable/ic_baseline_delete_24"
-            android:tint="@color/dark_gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/gray2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_exercise_cycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
@@ -54,10 +56,12 @@
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/template_background"
+            android:background="@drawable/planner_button_background"
+            android:enabled="false"
             android:gravity="center|center_vertical"
             android:padding="5dp"
             android:text="@string/cycle_delete"
+            android:theme="@style/AccentButton"
             app:layout_constraintEnd_toStartOf="@id/btn_cycle_add"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_exercise_cycle" />
@@ -69,10 +73,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/template_background"
+            android:background="@drawable/planner_button_background"
             android:gravity="center|center_vertical"
             android:padding="5dp"
             android:text="@string/cycle_add"
+            android:theme="@style/AccentButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_cycle_delete"
             app:layout_constraintTop_toBottomOf="@id/rv_exercise_cycle" />

@@ -19,7 +19,7 @@ class NestedInnerListViewAdapter(
         private val binding: ItemExerciseCycleSetupBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExerciseList.Cycle) {
-
+            binding.item = item
         }
     }
 
