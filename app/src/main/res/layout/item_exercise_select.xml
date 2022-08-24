@@ -5,18 +5,19 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.example.calefit.data.ExerciseSelection" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content">
 
         <CheckBox
             android:id="@+id/cb_select_exercise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,22 +26,36 @@
             style="@style/ExercisePlanBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:lines="1"
+            android:text="@{item.name}"
+            android:textSize="14sp"
+            android:textStyle="normal"
             app:layout_constraintStart_toEndOf="@id/cb_select_exercise"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="운동종목" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_exercise_info"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
             android:padding="5dp"
             android:src="@drawable/ic_baseline_info_24"
             app:layout_constraintEnd_toEndOf="parent"
-            android:tint="@color/gray3"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/gray4" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:background="@color/gray1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_exercise_info" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

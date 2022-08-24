@@ -17,64 +17,84 @@
         <TextView
             android:id="@+id/tv_cycle_number"
             style="@style/ExerciseListBody"
-            android:layout_width="40dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:gravity="center"
             android:text="@{@string/cycle_counts_format(item.id)}"
-            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_count"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
             tools:text="1" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tl_exercise_cycle_plan_count"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="100dp"
+        <TextView
+            android:id="@+id/tv_cycle_name"
+            style="@style/ExerciseListBody"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false"
+            android:text="@string/cycle_count_name"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintHorizontal_bias=".95"
+            app:layout_constraintStart_toEndOf="@id/tv_cycle_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_exercise_plan_cycle_count"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/planner_button_background"
+            android:gravity="center|center_vertical"
+            android:hint="@string/edit_cycle"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:lines="1"
+            android:text="@{item.cycle}"
+            android:textAppearance="@style/TextLabel"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_weight"
             app:layout_constraintStart_toEndOf="@id/tv_cycle_number"
             app:layout_constraintTop_toTopOf="parent"
-            app:suffixText="@string/edit_cycle">
+            app:layout_constraintVertical_bias="0" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_exercise_plan_cycle_count"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/edit_text_background"
-                android:gravity="end|center_vertical"
-                android:inputType="number"
-                android:lines="1"
-                android:text="@{item.cycle}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tl_exercise_cycle_plan_weight"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="100dp"
+        <TextView
+            android:id="@+id/tv_weight_name"
+            style="@style/ExerciseListBody"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            app:errorEnabled="true"
-            app:hintEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tl_exercise_cycle_plan_count"
-            app:layout_constraintTop_toTopOf="parent"
-            app:suffixText="@string/edit_weight">
+            android:text="@string/cycle_weight_name"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_weight"
+            app:layout_constraintHorizontal_bias=".95"
+            app:layout_constraintStart_toEndOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_exercise_plan_cycle_weight"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/edit_text_background"
-                android:gravity="end|center_vertical"
-                android:inputType="number"
-                android:lines="1"
-                android:text="@{item.weight}" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <EditText
+            android:id="@+id/et_exercise_plan_cycle_weight"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/planner_button_background"
+            android:gravity="center|center_vertical"
+            android:hint="@string/edit_weight"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:lines="1"
+            android:text="@{item.weight}"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cycle_number" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
