@@ -2,6 +2,7 @@ package com.example.calefit.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -25,6 +26,24 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun startBottomNavigation() {
-        binding.navBottom.setupWithNavController(findNavController(R.id.fv_home_fragments))
+        val navController = findNavController(R.id.fv_home_fragments)
+
+        binding.navBottom.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.plannerFragment -> hideBottomNav()
+                R.id.exerciseSelectFragment -> hideBottomNav()
+                R.id.exerciseDetailFragment -> hideBottomNav()
+                else -> showBottomNav()
+            }
+        }
+    }
+
+    private fun showBottomNav() {
+        binding.navBottom.isVisible = true
+    }
+
+    private fun hideBottomNav() {
+        binding.navBottom.isVisible = false
     }
 }
