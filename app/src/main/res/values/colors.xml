@@ -13,4 +13,5 @@
     <color name="gray3">#cccccc</color>
     <color name="gradient1Start">#2F80ED</color>
     <color name="gradient1End">#B2FFDA</color>
+    <color name="charcoal">#36454f</color>
 </resources>

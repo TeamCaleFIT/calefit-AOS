@@ -1,15 +1,11 @@
 package com.example.calefit.ui.viewmodel
 
-import android.app.Application
 import android.content.Context
-import android.content.res.Resources
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import com.example.calefit.R
 import com.example.calefit.data.CalendarDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
