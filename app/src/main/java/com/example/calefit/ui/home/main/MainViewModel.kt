@@ -1,4 +1,4 @@
-package com.example.calefit.ui.home
+package com.example.calefit.ui.home.main
 
 import androidx.lifecycle.ViewModel
 import com.example.calefit.data.Aggregate

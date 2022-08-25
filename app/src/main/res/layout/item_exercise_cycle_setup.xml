@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:text="@string/cycle_weight_name"
             app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_weight"
-            app:layout_constraintHorizontal_bias=".95"
+            app:layout_constraintHorizontal_bias=".80"
             app:layout_constraintStart_toEndOf="@id/et_exercise_plan_cycle_count"
             app:layout_constraintTop_toTopOf="parent" />
 

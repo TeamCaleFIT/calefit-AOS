@@ -1,4 +1,4 @@
-package com.example.calefit.ui.home
+package com.example.calefit.ui.home.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

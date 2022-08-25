@@ -55,7 +55,7 @@ class ExerciseRepositoryImpl @Inject constructor(
 
     override fun getExerciseListOrError(): Aggregate<HashMap<String, List<ExerciseList.Exercise>>> {
         return if (exerciseList.isNotEmpty()) {
-            datasource.getDateList()
+//            datasource.getDateList()
             val map = hashMapOf<String, List<ExerciseList.Exercise>>()
             exerciseList.forEach {
                 map[it.date] = it.list
