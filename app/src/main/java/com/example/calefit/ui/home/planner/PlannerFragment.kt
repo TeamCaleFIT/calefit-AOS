@@ -17,7 +17,9 @@ import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.databinding.FragmentPlannerBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class PlannerFragment : Fragment() {
@@ -51,7 +53,7 @@ class PlannerFragment : Fragment() {
         binding.rvExerciseListToday.itemAnimator = null
 
         selectExercise(navController)
-        observeResult(navController)
+        observeSelectionFragmentResult(navController)
         observeData()
     }
 
@@ -61,13 +63,16 @@ class PlannerFragment : Fragment() {
         }
     }
 
-    private fun observeResult(navController: NavController) {
+    private fun observeSelectionFragmentResult(navController: NavController) {
         viewLifecycleOwner.repeatOnLifecycleExtension {
             navController.currentBackStackEntry?.savedStateHandle?.getStateFlow<List<ExerciseSelection>>(
                 "key", listOf()
-            )?.collect {
+            )?.onEach {
                 viewModel.addAdditionalExercise(it)
-            }
+            }?.onCompletion {
+                Log.d("PlannerFragment", "done : for the flow")
+
+            }?.collect()
         }
     }
 
