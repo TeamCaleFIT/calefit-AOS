@@ -1,10 +1,12 @@
 package com.example.calefit.data
 
+import java.io.Serializable
+
 data class ExerciseList(
     val date: String = "",
     var templateName: String = "",
     val list: List<Exercise>,
-) {
+) : Serializable {
     data class Exercise(
         val id: String,
         val name: String,

@@ -87,6 +87,10 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
         return exercisePlan.value.list[position].cycleList.size > 1
     }
 
+    fun setExerciseList(data: ExerciseList) {
+        _exercisePlan.value = data
+    }
+
     companion object {
         private val DEFAULT_EXERCISE_LIST = ExerciseList(list = listOf())
         private const val DEFAULT_CYCLE_VALUE = ""

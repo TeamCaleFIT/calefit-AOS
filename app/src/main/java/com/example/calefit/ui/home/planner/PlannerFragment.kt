@@ -10,12 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
+import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.databinding.FragmentPlannerBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
+import com.example.calefit.ui.home.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
@@ -28,7 +31,9 @@ class PlannerFragment : Fragment() {
 
     private val viewModel: PlannerViewModel by viewModels()
 
-    private val adapter by lazy {
+    private val args: PlannerFragmentArgs by navArgs<PlannerFragmentArgs>()
+
+    private val plannerAdapter by lazy {
         NestedOuterListViewAdapter(
             { position -> viewModel.addAdditionalCycle(position) },
             { position -> viewModel.removeCycle(position) },
@@ -47,10 +52,13 @@ class PlannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        args.item?.let { viewModel.setExerciseList(it) }
         val navController = findNavController()
 
-        binding.rvExerciseListToday.adapter = adapter
-        binding.rvExerciseListToday.itemAnimator = null
+        binding.rvExerciseListToday.apply {
+            adapter = plannerAdapter
+            itemAnimator = null
+        }
 
         selectExercise(navController)
         observeSelectionFragmentResult(navController)
@@ -79,7 +87,7 @@ class PlannerFragment : Fragment() {
     private fun observeData() {
         viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.exercisePlan.collect { exerciseList ->
-                adapter.submitList(exerciseList.list)
+                plannerAdapter.submitList(exerciseList.list)
                 binding.hasPlan = exerciseList.list.isNotEmpty()
             }
         }

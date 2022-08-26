@@ -89,4 +89,6 @@ class ExerciseRepositoryImpl @Inject constructor(
 
         return Aggregate.Success(map)
     }
+
+
 }
