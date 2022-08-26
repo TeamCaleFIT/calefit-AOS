@@ -4,16 +4,17 @@ Make your own exercise planner and share it with your firends.
 
 Calefit is mainly composed of modern android architecture, MVVM, flow, room, and databinding.
 
-Foundation - Components for core system capabilities, Kotlin extensions and support for multidex and automated testing.
-AppCompat - Degrade gracefully on older versions of Android.
-Android KTX - Write more concise, idiomatic Kotlin code.
-Architecture - A collection of libraries that help you design robust, testable, and maintainable apps. Start with classes for managing your UI component lifecycle and handling data persistence.
-Data Binding - Declaratively bind observable data to UI elements.
-Lifecycles - Create a UI that automatically responds to lifecycle events.
-Room - Access your app's SQLite database with in-app objects and compile-time checks.
-ViewModel - Store UI-related data that isn't destroyed on app rotations. Easily schedule asynchronous tasks for optimal execution.
-Hilt - for dependency injection
-Retrofit - A type-safe HTTP client for Android and Java.
+## Technical specification
+- Foundation - Components for core system capabilities, Kotlin extensions and support for multidex and automated testing.
+- AppCompat - Degrade gracefully on older versions of Android.
+- Android KTX - Write more concise, idiomatic Kotlin code.
+- Architecture - A collection of libraries that help you design robust, testable, and maintainable apps. Start with classes for managing your UI component lifecycle and handling data persistence.
+- Data Binding - Declaratively bind observable data to UI elements.
+- Lifecycles - Create a UI that automatically responds to lifecycle events.
+- Room - Access your app's SQLite database with in-app objects and compile-time checks.
+- ViewModel - Store UI-related data that isn't destroyed on app rotations. Easily schedule asynchronous tasks for optimal execution.
+- Hilt - for dependency injection
+- Retrofit - A type-safe HTTP client for Android and Java.
 
 
 # License
