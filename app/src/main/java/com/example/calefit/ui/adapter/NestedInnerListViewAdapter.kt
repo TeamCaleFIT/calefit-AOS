@@ -11,14 +11,14 @@ import com.example.calefit.databinding.ItemExerciseCycleSetupBinding
 
 class NestedInnerListViewAdapter(
 
-) : ListAdapter<ExerciseList.Cycle, NestedInnerListViewAdapter.NestedInnerListViewHolder>(
+) : ListAdapter<ExerciseList.Sets, NestedInnerListViewAdapter.NestedInnerListViewHolder>(
     AsyncDifferConfig.Builder(ItemDiffUtil).build()
 ) {
 
     class NestedInnerListViewHolder(
         private val binding: ItemExerciseCycleSetupBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ExerciseList.Cycle) {
+        fun bind(item: ExerciseList.Sets) {
             binding.item = item
         }
     }
@@ -34,17 +34,17 @@ class NestedInnerListViewAdapter(
         holder.bind(currentList[position])
     }
 
-    private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseList.Cycle>() {
+    private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseList.Sets>() {
         override fun areItemsTheSame(
-            oldItem: ExerciseList.Cycle,
-            newItem: ExerciseList.Cycle
+            oldItem: ExerciseList.Sets,
+            newItem: ExerciseList.Sets
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: ExerciseList.Cycle,
-            newItem: ExerciseList.Cycle
+            oldItem: ExerciseList.Sets,
+            newItem: ExerciseList.Sets
         ): Boolean {
             return oldItem == newItem
         }

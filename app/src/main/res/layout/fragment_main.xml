@@ -78,6 +78,7 @@
                 tools:listitem="@layout/item_today_exercise" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_edit_exercise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"

@@ -38,16 +38,16 @@ class CustomCalendarView(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         binding.viewModel = viewModel
-        setAdapter { position ->
-            viewModel?.changeDateBackground(position)
-        }
+        setAdapter()
         observeDataFromViewModel()
     }
 
     fun getClickedDate(): Flow<String>? = viewModel?.date
 
-    private fun setAdapter(clickEvent: (Int) -> Unit) {
-        adapter = CalendarAdapter(clickEvent)
+    private fun setAdapter() {
+        adapter = CalendarAdapter{ position ->
+            viewModel?.changeDateBackground(position)
+        }
         binding.rvCustomCalendarView.adapter = adapter
     }
 

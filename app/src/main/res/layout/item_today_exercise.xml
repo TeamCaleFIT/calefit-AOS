@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.example.calefit.data.ExerciseList.Exercise" />
+            type="com.example.calefit.data.ExerciseDailyDetail" />
 
         <import type="com.example.calefit.R" />
     </data>
@@ -23,31 +23,23 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{@string/name_cycle(item.name, item.cycleList.size)}"
+            android:text="@{item.name}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="바벨 스쿼드 1세트" />
 
         <TextView
-            android:id="@+id/tv_cycle_avg"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:text="Avg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_exercise_name" />
-
-        <TextView
             android:id="@+id/tv_exercise_cycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
+            android:text="@{@string/cycle_counts_format(item.cycleCount)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@id/tv_cycle_avg"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_exercise_name"
-            tools:text="0kg" />
+            tools:text="0cycle" />
 
         <TextView
             android:id="@+id/tv_exercise_total_weight"
@@ -56,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="16dp"
+            android:text="@{@string/weight_volume_format(item.weightVolume)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="120kg" />

@@ -8,10 +8,10 @@ data class ExerciseList(
     data class Exercise(
         val id: String,
         val name: String,
-        val cycleList: List<Cycle> = DEFAULT_CYCLE_LIST
+        val cycleList: List<Sets> = DEFAULT_CYCLE_LIST
     )
 
-    data class Cycle(
+    data class Sets(
         val id: String,
         val cycle: String,
         val weight: String,
@@ -19,7 +19,7 @@ data class ExerciseList(
 
     companion object {
         val DEFAULT_CYCLE_LIST = listOf(
-            Cycle(
+            Sets(
                 id = "1",
                 cycle = "",
                 weight = ""

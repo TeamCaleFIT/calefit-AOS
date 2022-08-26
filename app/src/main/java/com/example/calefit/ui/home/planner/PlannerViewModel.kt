@@ -43,7 +43,7 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
             val targetExercise = exerciseList[position]
             val newCycleList = targetExercise.cycleList.toMutableList()
             newCycleList.add(
-                ExerciseList.Cycle(
+                ExerciseList.Sets(
                     id = (targetExercise.cycleList.size + 1).toString(),
                     cycle = DEFAULT_CYCLE_VALUE,
                     weight = DEFAULT_CYCLE_VALUE,
