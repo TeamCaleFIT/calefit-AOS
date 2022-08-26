@@ -5,5 +5,5 @@ import com.example.calefit.data.ExerciseList
 
 interface ExerciseRepository {
 
-    fun getExerciseListOrError(): Aggregate<HashMap<String, List<ExerciseList.Exercise>>>
+    fun getExerciseDataFromRepository(): Aggregate<HashMap<String, ExerciseList>>
 }
