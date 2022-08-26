@@ -1,19 +1,20 @@
 package com.example.calefit.ui.home.detali
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.calefit.R
+import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentExerciseDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ExerciseDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentExerciseDetailBinding
+    private var binding by autoCleared<FragmentExerciseDetailBinding>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

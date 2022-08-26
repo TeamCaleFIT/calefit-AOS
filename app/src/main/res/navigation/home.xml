@@ -13,7 +13,10 @@
         <action
             android:id="@+id/action_mainFragment_to_plannerFragment"
             app:destination="@id/plannerFragment"
-            app:launchSingleTop="true" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/plannerFragment"
@@ -29,7 +32,8 @@
             app:destination="@id/templateFragment" />
         <action
             android:id="@+id/action_plannerFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/templateFragment"

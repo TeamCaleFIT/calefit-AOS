@@ -15,6 +15,8 @@ import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentMainBinding
 import com.example.calefit.ui.adapter.ExerciseDailyDetailListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 
 
 @AndroidEntryPoint
@@ -62,23 +64,26 @@ class MainFragment : Fragment() {
 
     private fun observeData() {
         viewLifecycleOwner.repeatOnLifecycleExtension {
-            viewModel.exerciseMap.collect { map ->
-                viewModel.clickedDate.collect { date ->
-                    val exerciseList = map[date]
-                    if (exerciseList == null) {
-                        binding.hasSchedule = false
-                    } else {
-                        binding.hasSchedule = true
-                        exerciseAdapter.submitList(exerciseList)
-                    }
+            viewModel.exerciseMap.combine(viewModel.clickedDate) { map, date ->
+                val exerciseList = map[date]
+                if (exerciseList == null) {
+                    binding.hasSchedule = false
+                } else {
+                    binding.hasSchedule = true
+                    exerciseAdapter.submitList(exerciseList)
                 }
-            }
+            }.collect()
         }
     }
 
     private fun goToPlannerFragment(navController: NavController) {
-        binding.btnMakeExerciseList.setOnClickListener {
-            navController.navigate(R.id.action_mainFragment_to_plannerFragment)
+        with(binding) {
+            btnMakeExerciseList.setOnClickListener {
+                navController.navigate(R.id.action_mainFragment_to_plannerFragment)
+            }
+            btnEditExercise.setOnClickListener {
+                navController.navigate(R.id.action_mainFragment_to_plannerFragment)
+            }
         }
     }
 }
