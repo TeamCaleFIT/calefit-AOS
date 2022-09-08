@@ -79,7 +79,6 @@ class PlannerFragment : Fragment() {
                 viewModel.addAdditionalExercise(it)
             }?.onCompletion {
                 Log.d("PlannerFragment", "done : for the flow")
-
             }?.collect()
         }
     }

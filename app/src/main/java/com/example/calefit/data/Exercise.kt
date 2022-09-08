@@ -1,18 +1,21 @@
 package com.example.calefit.data
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 data class ExerciseList(
     val date: String = "",
     var templateName: String = "",
     val list: List<Exercise>,
-) : Serializable {
+) : java.io.Serializable {
+
+    @Serializable
     data class Exercise(
         val id: String,
         val name: String,
         val cycleList: List<Sets> = DEFAULT_CYCLE_LIST
     )
 
+    @Serializable
     data class Sets(
         val id: String,
         val cycle: String,
