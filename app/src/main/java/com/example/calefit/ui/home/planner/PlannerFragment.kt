@@ -1,5 +1,6 @@
 package com.example.calefit.ui.home.planner
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,9 @@ import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.databinding.FragmentPlannerBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
+import com.example.calefit.ui.common.InputCategory
+import com.example.calefit.ui.decoration.NestedRecyclerDecoration
+import com.example.calefit.ui.home.NumberPickFragment
 import com.example.calefit.ui.home.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -37,8 +41,20 @@ class PlannerFragment : Fragment() {
         NestedOuterListViewAdapter(
             { position -> viewModel.addAdditionalCycle(position) },
             { position -> viewModel.removeCycle(position) },
-            { position -> viewModel.removeExercise(position) }
+            { position -> viewModel.removeExercise(position) },
+            { outerPosition, innerPosition, value, category ->
+                viewModel.getUserInputValue(
+                    outerPosition,
+                    innerPosition,
+                    value,
+                    category
+                )
+            }
         )
+    }
+
+    private val nestedRecyclerItemDecoration by lazy {
+        NestedRecyclerDecoration(DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING)
     }
 
     override fun onCreateView(
@@ -58,11 +74,17 @@ class PlannerFragment : Fragment() {
         binding.rvExerciseListToday.apply {
             adapter = plannerAdapter
             itemAnimator = null
+            addItemDecoration(nestedRecyclerItemDecoration)
         }
 
         selectExercise(navController)
         observeSelectionFragmentResult(navController)
         observeData()
+
+        binding.btnSaveExercise.setOnClickListener {
+            val fragment = NumberPickFragment.newInstance(InputCategory.CYCLE)
+            fragment.show(parentFragmentManager, fragment.tag)
+        }
     }
 
     private fun selectExercise(navController: NavController) {
@@ -90,5 +112,9 @@ class PlannerFragment : Fragment() {
                 binding.hasPlan = exerciseList.list.isNotEmpty()
             }
         }
+    }
+
+    companion object {
+        private const val DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING = 50
     }
 }

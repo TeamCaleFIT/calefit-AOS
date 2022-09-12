@@ -50,7 +50,8 @@
     <string name="year_month_day_format">%s-%02d-%02d</string>
     <string name="name_cycle">%s %s세트</string>
     <string name="plan_exercise_cycle">운동 계획 작성하기</string>
-    <string name="save_exercise_list">저장하기</string>
+    <string name="save_exercise_list">오늘 운동 계획 저장하기</string>
+    <string name="save_exercise_list_as_template">템플릿으로 저장하기</string>
     <string name="load_exercise_list">템플릿 불러오기</string>
     <string name="exercise_plan_cycle">사이클 수</string>
     <string name="exercise_plan_weight">중량</string>
@@ -69,5 +70,6 @@
     <string name="cycle_count_name">횟수 </string>
     <string name="edit_exercise">편집하기</string>
     <string name="weight_volume_format">%s vol</string>
+    <string name="save_number_btn_title">선택하기</string>
 
 </resources>

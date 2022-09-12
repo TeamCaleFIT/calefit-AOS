@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.databinding.ItemExercisePlanBinding
+import com.example.calefit.ui.common.InputCategory
 
 class NestedOuterListViewAdapter(
     private val addCycle: (Int) -> Boolean,
     private val removeCycle: (Int) -> Boolean,
     private val removeExercise: (Int) -> Unit,
+    private val userInput: (Int, Int, String, InputCategory) -> Unit
 ) : ListAdapter<ExerciseList.Exercise, NestedOuterListViewAdapter.NestedOuterListViewViewHolder>(
     AsyncDifferConfig.Builder(ItemDiffUtil).build()
 ) {
@@ -21,12 +23,19 @@ class NestedOuterListViewAdapter(
         private val addCycle: (Int) -> Boolean,
         private val removeCycle: (Int) -> Boolean,
         private val removeExercise: (Int) -> Unit,
+        private val userInput: (Int, Int, String, InputCategory) -> Unit,
         private val innerLayoutManager: LinearLayoutManager,
-        private val innerAdapter: NestedInnerListViewAdapter = NestedInnerListViewAdapter(),
         private val viewPool: RecyclerView.RecycledViewPool
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: ExerciseList.Exercise) {
             binding.item = item
+
+            val innerAdapter = NestedInnerListViewAdapter(
+                userInput = userInput,
+                outerPosition = adapterPosition
+            )
+
             binding.rvExerciseCycle.apply {
                 adapter = innerAdapter
                 layoutManager = innerLayoutManager
@@ -64,6 +73,7 @@ class NestedOuterListViewAdapter(
             addCycle = addCycle,
             removeCycle = removeCycle,
             removeExercise = removeExercise,
+            userInput = userInput,
             innerLayoutManager = layoutManager,
             viewPool = viewPool,
         )

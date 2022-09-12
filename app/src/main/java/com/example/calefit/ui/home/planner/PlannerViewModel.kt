@@ -1,8 +1,11 @@
 package com.example.calefit.ui.home.planner
 
+import android.util.Log
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.ui.common.NestedRecyclerBaseViewModel
+import com.example.calefit.ui.common.InputCategory
+import com.example.calefit.ui.home.HomeActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,6 +20,8 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
 
     private val _exercisePlan = MutableStateFlow(DEFAULT_EXERCISE_LIST)
     val exercisePlan = _exercisePlan.asStateFlow()
+
+    private lateinit var _userInputExercisePlan: ExerciseList
 
     override fun addAdditionalExercise(exerciseList: List<ExerciseSelection>) {
         if (exerciseList.isEmpty()) {
@@ -38,6 +43,8 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
     }
 
     override fun addAdditionalCycle(position: Int): Boolean {
+
+
         _exercisePlan.update { currentList ->
             val exerciseList = currentList.list.toMutableList()
             val targetExercise = exerciseList[position]
@@ -62,6 +69,8 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
             return
         }
 
+        Log.d("PlannerViewModel", position.toString())
+
         _exercisePlan.update { currentList ->
             val newList = currentList.list.toMutableList()
             newList.removeAt(position)
@@ -85,6 +94,63 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
         }
 
         return exercisePlan.value.list[position].cycleList.size > 1
+    }
+
+    //many errors occurred this with edittext text watcher
+    override fun getUserInputValue(
+        outerPosition: Int,
+        innerPosition: Int,
+        value: String?,
+        category: InputCategory
+    ) {
+
+        Log.d("PlannerViewModel", "outter adapterposition : $outerPosition")
+
+        if (value == null
+            || outerPosition == -1
+            || _exercisePlan.value.list.size <= outerPosition
+            || _exercisePlan.value.list[outerPosition].cycleList.size <= innerPosition
+            || innerPosition == -1
+        ) {
+            return
+        }
+
+        val data = _exercisePlan.value.list[outerPosition].cycleList[innerPosition]
+        when (category) {
+            InputCategory.CYCLE -> {
+                if (data.cycle == value) {
+                    return
+                }
+            }
+            InputCategory.WEIGHT -> {
+                if (data.weight == value) {
+                    return
+                }
+            }
+        }
+
+        val exerciseList = _exercisePlan.value.list.toMutableList()
+        val exercise = exerciseList[outerPosition]
+        val innerList = exercise.cycleList.toMutableList()
+        val set = innerList[innerPosition]
+        val newSet: ExerciseList.Sets = when (category) {
+            InputCategory.CYCLE -> {
+                set.copy(cycle = value)
+            }
+            InputCategory.WEIGHT -> {
+                set.copy(weight = value)
+            }
+        }
+        innerList[innerPosition] = newSet
+        val newExercise = exercise.copy(cycleList = innerList)
+        exerciseList[outerPosition] = newExercise
+        _exercisePlan.value.list = exerciseList
+
+        Log.d(
+            "PlannerViewModel",
+            "cycle : ${_exercisePlan.value.list[outerPosition].cycleList[innerPosition].cycle}   " +
+                    "weight : ${_exercisePlan.value.list[outerPosition].cycleList[innerPosition].weight}"
+        )
     }
 
     fun setExerciseList(data: ExerciseList) {

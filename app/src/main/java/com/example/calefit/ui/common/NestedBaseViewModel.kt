@@ -12,4 +12,11 @@ abstract class NestedRecyclerBaseViewModel : ViewModel() {
     abstract fun removeExercise(position: Int)
 
     abstract fun removeCycle(position: Int): Boolean
+
+    abstract fun getUserInputValue(
+        outerPosition: Int,
+        innerPosition: Int,
+        value: String?,
+        category: InputCategory
+    )
 }

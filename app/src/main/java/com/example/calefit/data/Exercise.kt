@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 data class ExerciseList(
     val date: String = "",
     var templateName: String = "",
-    val list: List<Exercise>,
+    var list: List<Exercise>,
 ) : java.io.Serializable {
 
     @Serializable
@@ -20,7 +20,7 @@ data class ExerciseList(
         val id: String,
         val cycle: String,
         val weight: String,
-    )
+    ) : java.io.Serializable
 
     companion object {
         val DEFAULT_CYCLE_LIST = listOf(
