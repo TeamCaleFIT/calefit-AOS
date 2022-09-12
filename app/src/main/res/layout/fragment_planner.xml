@@ -74,11 +74,26 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/extra_button_background_"
-                android:enabled="false"
+                android:enabled="true"
                 android:text="@string/save_exercise_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_load_exercise_list" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save_as_template"
+                style="@style/ExerciseListBody"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/extra_button_background_"
+                android:enabled="false"
+                android:text="@string/save_exercise_list_as_template"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_save_exercise" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
