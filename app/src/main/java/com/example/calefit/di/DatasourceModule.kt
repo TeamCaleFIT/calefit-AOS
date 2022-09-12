@@ -1,5 +1,7 @@
 package com.example.calefit.di
 
+import com.example.calefit.datasource.LocalDatasource
+import com.example.calefit.datasource.LocalDatasourceImpl
 import com.example.calefit.datasource.RemoteDatasource
 import com.example.calefit.datasource.RemoteDatasourceImpl
 import dagger.Binds
@@ -17,4 +19,10 @@ abstract class DatasourceModule {
     abstract fun remoteDatasource(
         remoteDatasourceImpl: RemoteDatasourceImpl
     ): RemoteDatasource
+
+    @Binds
+    @Singleton
+    abstract fun localDatasource(
+        localDatasourceImpl: LocalDatasourceImpl
+    ): LocalDatasource
 }

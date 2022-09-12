@@ -69,7 +69,6 @@ class CustomCalendarViewModel @Inject constructor(
             newList[position] = newData
             _date.value = newData.date
             clickedDate = newData.date
-            Log.d("ViewModel", clickedDate)
             newList
         }
     }
