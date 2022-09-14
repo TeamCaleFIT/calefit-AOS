@@ -6,18 +6,18 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.calefit.data.ExerciseList
+import com.example.calefit.data.ExerciseDailyDetail
 import com.example.calefit.databinding.ItemTodayExerciseBinding
 
-class ExerciseListAdapter :
-    ListAdapter<ExerciseList.Exercise, ExerciseListAdapter.ExerciseListViewHolder>(
+class ExerciseDailyDetailListAdapter :
+    ListAdapter<ExerciseDailyDetail, ExerciseDailyDetailListAdapter.ExerciseListViewHolder>(
         AsyncDifferConfig.Builder(ItemDiffUtil).build()
     ) {
 
     class ExerciseListViewHolder(
         private val binding: ItemTodayExerciseBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ExerciseList.Exercise) {
+        fun bind(item: ExerciseDailyDetail) {
             binding.item = item
         }
     }
@@ -39,15 +39,15 @@ class ExerciseListAdapter :
         holder.bind(currentList[position])
     }
 
-    private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseList.Exercise>() {
+    private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseDailyDetail>() {
         override fun areItemsTheSame(
-            oldItem: ExerciseList.Exercise,
-            newItem: ExerciseList.Exercise,
+            oldItem: ExerciseDailyDetail,
+            newItem: ExerciseDailyDetail,
         ) = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: ExerciseList.Exercise,
-            newItem: ExerciseList.Exercise,
+            oldItem: ExerciseDailyDetail,
+            newItem: ExerciseDailyDetail,
         ) = oldItem == newItem
     }
 }

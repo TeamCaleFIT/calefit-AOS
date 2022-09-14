@@ -1,28 +1,27 @@
-package com.example.calefit.ui.viewmodel
+package com.example.calefit.ui.home.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.calefit.data.Aggregate
 import com.example.calefit.data.ExerciseList
-import com.example.calefit.usecase.GetExerciseListUseCase
+import com.example.calefit.usecase.GetExerciseDetailUseCase
+import com.example.calefit.usecase.GetSpecificDateExerciseListOrNullUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    getExerciseListUseCase: GetExerciseListUseCase
+    getExerciseDetailUseCase: GetExerciseDetailUseCase,
+    private val getSpecificDateExerciseListOrNullUseCase: GetSpecificDateExerciseListOrNullUseCase
 ) : ViewModel() {
 
     private val _clickedDate = MutableStateFlow("")
     val clickedDate = _clickedDate.asStateFlow()
 
     private val _exerciseList = MutableStateFlow(
-        getExerciseListUseCase()
+        getExerciseDetailUseCase()
     )
 
     val exerciseMap = _exerciseList.map {
@@ -45,7 +44,24 @@ class MainViewModel @Inject constructor(
     val dataLoading = MutableStateFlow(false)
 
     fun setDate(date: String) {
-        _clickedDate.value = date
         require(date.isNotEmpty())
+        _clickedDate.value = date
+    }
+
+    fun getClickedExerciseListOrNull(): ExerciseList? {
+        return when (val data = getSpecificDateExerciseListOrNullUseCase(clickedDate.value)) {
+            is Aggregate.Success -> {
+                dataLoading.value = false
+                data.data
+            }
+            is Aggregate.Error -> {
+                dataLoading.value = false
+                null
+            }
+            is Aggregate.Loading -> {
+                dataLoading.value = true
+                null
+            }
+        }
     }
 }

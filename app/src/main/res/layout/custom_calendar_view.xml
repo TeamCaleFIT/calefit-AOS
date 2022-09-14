@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.calefit.ui.viewmodel.CustomCalendarViewModel" />
+            type="com.example.calefit.ui.custom.CustomCalendarViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
             android:id="@+id/btn_calendar_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/show_previous_month"
             android:onClick="@{()->viewModel.getPreviousMonth()}"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="16dp"
             android:contentDescription="@string/show_next_month"
             android:onClick="@{()->viewModel.getNextMonth()}"
             android:padding="10dp"

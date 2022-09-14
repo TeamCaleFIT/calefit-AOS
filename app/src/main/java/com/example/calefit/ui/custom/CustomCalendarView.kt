@@ -12,7 +12,6 @@ import com.example.calefit.R
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.CustomCalendarViewBinding
 import com.example.calefit.ui.adapter.CalendarAdapter
-import com.example.calefit.ui.viewmodel.CustomCalendarViewModel
 import kotlinx.coroutines.flow.Flow
 
 class CustomCalendarView(
@@ -39,16 +38,16 @@ class CustomCalendarView(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         binding.viewModel = viewModel
-        setAdapter { position ->
-            viewModel?.changeDateBackground(position)
-        }
+        setAdapter()
         observeDataFromViewModel()
     }
 
     fun getClickedDate(): Flow<String>? = viewModel?.date
 
-    private fun setAdapter(clickEvent: (Int) -> Unit) {
-        adapter = CalendarAdapter(clickEvent)
+    private fun setAdapter() {
+        adapter = CalendarAdapter{ position ->
+            viewModel?.changeDateBackground(position)
+        }
         binding.rvCustomCalendarView.adapter = adapter
     }
 

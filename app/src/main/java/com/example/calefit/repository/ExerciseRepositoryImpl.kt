@@ -3,12 +3,13 @@ package com.example.calefit.repository
 import com.example.calefit.data.Aggregate
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.datasource.RemoteDatasource
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class ExerciseRepositoryImpl @Inject constructor(
     private val datasource: RemoteDatasource,
 ) : ExerciseRepository {
+
+    private val _exerciseHashMap = hashMapOf<String, ExerciseList>()
 
     private val exerciseList = listOf(
         ExerciseList(
@@ -17,20 +18,23 @@ class ExerciseRepositoryImpl @Inject constructor(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "스쿼트",
-                    cycle = "3회",
-                    weight = "100kg"
+                    cycleList = listOf(
+                        ExerciseList.Sets("1", "3", "30")
+                    ),
                 ),
                 ExerciseList.Exercise(
                     id = "2",
                     name = "덤벨",
-                    cycle = "10회",
-                    weight = "40kg"
+                    cycleList = listOf(
+                        ExerciseList.Sets("1", "2", "100")
+                    )
                 ),
                 ExerciseList.Exercise(
                     id = "3",
                     name = "벤치프레스",
-                    cycle = "5회",
-                    weight = "120kg"
+                    cycleList = listOf(
+                        ExerciseList.Sets("1", "5", "400")
+                    )
                 )
             )
         ),
@@ -40,23 +44,51 @@ class ExerciseRepositoryImpl @Inject constructor(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "런지",
-                    cycle = "5회",
-                    weight = "20kg"
+                    cycleList = listOf(
+                        ExerciseList.Sets("1", "3", "320")
+                    )
+                )
+            )
+        ),
+        ExerciseList(
+            date = "2022-08-30",
+            list = listOf(
+                ExerciseList.Exercise(
+                    id = "1",
+                    name = "벤치프레스",
+                    cycleList = listOf(
+                        ExerciseList.Sets("1", "3", "200"),
+                        ExerciseList.Sets("2", "5", "220")
+                    )
+                ),
+                ExerciseList.Exercise(
+                    id = "2",
+                    name = "덤벨프레스",
+                    cycleList = listOf(
+                        ExerciseList.Sets("1", "2", "180"),
+                        ExerciseList.Sets("2", "1", "120")
+                    )
                 )
             )
         )
     )
 
-    override fun getExerciseListOrError(): Aggregate<HashMap<String, List<ExerciseList.Exercise>>> {
-        return if (exerciseList.isNotEmpty()) {
-            datasource.getDateList()
-            val map = hashMapOf<String, List<ExerciseList.Exercise>>()
-            exerciseList.forEach {
-                map[it.date] = it.list
-            }
-            Aggregate.Success(map)
-        } else {
-            Aggregate.Error(IllegalArgumentException())
+    //TODO when use server this code will changed to call datasource
+    override fun getExerciseDataFromRepository(): Aggregate<HashMap<String, ExerciseList>> {
+
+        //TODO return Aggregate Fail if datasource has no data from the datasource
+
+        if (_exerciseHashMap.isNotEmpty()) {
+            return Aggregate.Success(_exerciseHashMap)
         }
+
+        val map: HashMap<String, ExerciseList> = hashMapOf()
+        exerciseList.forEach {
+            map[it.date] = it
+        }
+
+        return Aggregate.Success(map)
     }
+
+
 }

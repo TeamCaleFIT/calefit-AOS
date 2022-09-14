@@ -4,26 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
+import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentSignUpBinding
-import com.example.calefit.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SingUpFragment : Fragment() {
 
     private var binding by autoCleared<FragmentSignUpBinding>()
-    private val viewModel: LoginViewModel by activityViewModels()
-    private var idFlag = false
-    private var passwordFlag = false
-    private var passwordCheckFlag = false
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,94 +34,46 @@ class SingUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = findNavController()
+        binding.viewModel = viewModel
 
-        emailSignUpUserInfo()
+        observeViewModel()
         goBackToLogin(navController)
     }
 
-    private fun emailSignUpUserInfo() {
-        with(binding) {
-            idTextInputEditText.addTextChangedListener { userInput ->
-                if (userInput != null) {
-                    when {
-                        userInput.isEmpty() -> {
-                            binding.idTextInputLayout.error =
-                                getString(R.string.user_email_zone)
-                            idFlag = false
-                        }
-                        !checkEmailRegex(userInput.toString()) -> {
-                            binding.idTextInputLayout.error =
-                                getString(R.string.not_validate_email_format)
-                            idFlag = false
-                        }
-                        else -> {
-                            binding.idTextInputLayout.error = null
-                            idFlag = true
-                        }
-                    }
+    private fun observeViewModel() {
+        with(viewLifecycleOwner) {
+            repeatOnLifecycleExtension {
+                viewModel.hasRequiredSignUpData.collect {
+                    binding.isFilled = it
                 }
-                checkFlags()
             }
-            passwordTextInputEditText.addTextChangedListener { userInput ->
-                if (userInput != null) {
-                    when {
-                        userInput.isEmpty() -> {
-                            binding.passwordTextInputLayout.error =
-                                getString(R.string.user_password_zone)
-                            passwordFlag = false
-                        }
-                        else -> {
-                            binding.passwordTextInputLayout.error = null
-                            passwordFlag = true
-                        }
+            repeatOnLifecycleExtension {
+                viewModel.userEmail.collect {
+                    if (viewModel.checkEmailAddress()) {
+                        binding.idTextInputLayout.error = null
+                    } else {
+                        binding.idTextInputLayout.error =
+                            getString(R.string.not_validate_email_format)
                     }
                 }
-                checkFlags()
             }
-            passwordRecheckTextInputEditText.addTextChangedListener { userInput ->
-                if (userInput != null) {
-                    when {
-                        userInput.isEmpty() -> {
-                            binding.passwordRecheckTextInputLayout.error =
-                                getString(R.string.user_password_not_match)
-                            passwordCheckFlag = false
-                        }
-                        binding.passwordTextInputEditText.text !=
-                                binding.passwordRecheckTextInputEditText.text
-                                || binding.passwordRecheckTextInputEditText.text.isNullOrEmpty() -> {
-
-                            binding.passwordRecheckTextInputLayout.error =
-                                getString(R.string.user_password_diff)
-                            passwordCheckFlag = false
-                        }
-                        else -> {
-                            binding.passwordRecheckTextInputLayout.error = null
-                            passwordCheckFlag = true
-                        }
+            repeatOnLifecycleExtension {
+                viewModel.userPasswordCheck.collect {
+                    if (viewModel.checkPassword()) {
+                        binding.passwordRecheckTextInputLayout.error = null
+                    } else {
+                        binding.passwordRecheckTextInputLayout.error =
+                            getString(R.string.user_password_diff)
                     }
                 }
-                checkFlags()
             }
         }
     }
 
-
-    private fun checkEmailRegex(id: String): Boolean {
-        return emailValidation.matches(id)
-    }
-
-    private fun checkFlags() {
-        binding.btnSignUpOk.isEnabled = idFlag && passwordFlag && passwordCheckFlag
-    }
-
+    //TODO check if email sign up is validated from the server then change fragment to another
     private fun goBackToLogin(navController: NavController) {
         binding.btnSignUpOk.setOnClickListener {
             navController.navigate(R.id.action_singUpFragment_to_loginFragment)
         }
-    }
-
-    companion object {
-        private val emailValidation =
-            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$".toRegex()
     }
 }

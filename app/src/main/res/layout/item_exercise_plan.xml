@@ -5,85 +5,92 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.example.calefit.data.ExerciseList.Exercise" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="wrap_content"
+        android:background="@drawable/exercise_cycle_all_background">
 
         <TextView
             android:id="@+id/tv_exercise_title"
-            style="@style/ExercisePlanTitle"
+            style="@style/ExercisePlanBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@{item.name}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="레그프래스" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_exercise_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:padding="4dp"
             android:src="@drawable/ic_baseline_delete_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/gray2" />
 
-        <TextView
-            android:id="@+id/tv_exercise_plan_cycle"
-            style="@style/ExercisePlanBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="@string/exercise_plan_cycle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_exercise_title" />
-
-        <EditText
-            android:id="@+id/et_exercise_plan_cycle"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_background"
-            android:gravity="end|center_vertical"
-            android:hint="@string/edit_cycle"
-            android:inputType="number"
-            android:lines="1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_exercise_cycle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_exercise_close" />
-
-        <TextView
-            android:id="@+id/tv_exercise_plan_weight"
-            style="@style/ExercisePlanBody"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="@string/exercise_plan_weight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_exercise_plan_cycle" />
+            app:layout_constraintTop_toBottomOf="@id/tv_exercise_title"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_exercise_cycle_setup" />
 
-        <EditText
-            android:id="@+id/et_exercise_plan_weight"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edit_text_background"
-            android:gravity="end|center_vertical"
-            android:hint="@string/edit_weight"
-            android:inputType="number"
-            android:lines="1"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cycle_delete"
+            style="@style/ExercisePlanBody"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/planner_button_background"
+            android:enabled="false"
+            android:gravity="center|center_vertical"
+            android:padding="5dp"
+            android:text="@string/cycle_delete"
+            android:theme="@style/AccentButton"
+            app:layout_constraintEnd_toStartOf="@id/btn_cycle_add"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_exercise_cycle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cycle_add"
+            style="@style/ExercisePlanBody"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/planner_button_background"
+            android:gravity="center|center_vertical"
+            android:padding="5dp"
+            android:text="@string/cycle_add"
+            android:theme="@style/AccentButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_exercise_plan_cycle" />
+            app:layout_constraintStart_toEndOf="@id/btn_cycle_delete"
+            app:layout_constraintTop_toBottomOf="@id/rv_exercise_cycle" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray2"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_cycle_add" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

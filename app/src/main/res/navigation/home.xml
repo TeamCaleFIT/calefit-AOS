@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.calefit.ui.home.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_plannerFragment"
+            app:destination="@id/plannerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/plannerFragment"
+        android:name="com.example.calefit.ui.home.planner.PlannerFragment"
+        android:label="PlannerFragment"
+        tools:layout="@layout/fragment_planner" >
+        <action
+            android:id="@+id/action_plannerFragment_to_exerciseSelectFragment"
+            app:destination="@id/exerciseSelectFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_plannerFragment_to_templateFragment"
+            app:destination="@id/templateFragment" />
+        <action
+            android:id="@+id/action_plannerFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <argument
+            android:name="item"
+            app:argType="com.example.calefit.data.ExerciseList"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/templateFragment"
+        android:name="com.example.calefit.ui.home.template.TemplateFragment"
+        android:label="TemplateFragment"
+        tools:layout="@layout/fragment_template" >
+        <action
+            android:id="@+id/action_templateFragment_to_exerciseDetailFragment"
+            app:destination="@id/exerciseDetailFragment" />
+        <action
+            android:id="@+id/action_templateFragment_to_plannerFragment"
+            app:destination="@id/plannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseSelectFragment"
+        android:name="com.example.calefit.ui.home.select.ExerciseSelectFragment"
+        android:label="ExerciseSelectFragment"
+        tools:layout="@layout/fragment_exercise_select" >
+        <action
+            android:id="@+id/action_exerciseSelectFragment_to_plannerFragment"
+            app:destination="@id/plannerFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_exerciseSelectFragment_to_exerciseDetailFragment"
+            app:destination="@id/exerciseDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/exerciseDetailFragment"
+        android:name="com.example.calefit.ui.home.detali.ExerciseDetailFragment"
+        android:label="ExerciseDetailFragment"
+        tools:layout="@layout/fragment_exercise_detail" >
+        <action
+            android:id="@+id/action_exerciseDetailFragment_to_exerciseSelectFragment"
+            app:destination="@id/exerciseSelectFragment" />
+    </fragment>
+</navigation>

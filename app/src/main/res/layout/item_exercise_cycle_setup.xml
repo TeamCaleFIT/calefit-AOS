@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.calefit.data.ExerciseList.Sets" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_cycle_number"
+            style="@style/ExerciseListBody"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{@string/cycle_counts_format(item.id)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_cycle_name"
+            style="@style/ExerciseListBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cycle_count_name"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintHorizontal_bias=".95"
+            app:layout_constraintStart_toEndOf="@id/tv_cycle_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_exercise_plan_cycle_count"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/planner_button_background"
+            android:gravity="center|center_vertical"
+            android:hint="@string/edit_cycle"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:lines="1"
+            android:text="@{item.cycle}"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_weight"
+            app:layout_constraintStart_toEndOf="@id/tv_cycle_number"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/tv_weight_name"
+            style="@style/ExerciseListBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cycle_weight_name"
+            app:layout_constraintEnd_toStartOf="@id/et_exercise_plan_cycle_weight"
+            app:layout_constraintHorizontal_bias=".80"
+            app:layout_constraintStart_toEndOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_exercise_plan_cycle_weight"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/planner_button_background"
+            android:gravity="center|center_vertical"
+            android:hint="@string/edit_weight"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:lines="1"
+            android:text="@{item.weight}"
+            android:textAppearance="@style/TextLabel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/et_exercise_plan_cycle_count"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_cycle_number" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

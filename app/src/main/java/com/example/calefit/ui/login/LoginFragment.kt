@@ -14,7 +14,6 @@ import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentLoginBinding
 import com.example.calefit.ui.home.HomeActivity
-import com.example.calefit.ui.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -54,9 +53,7 @@ class LoginFragment @Inject constructor() : Fragment() {
         }
     }
 
-    /**
-     *This function will be changed when a server is connected
-     */
+    // TODO change function as if the server allows login
     private fun gotoHomeActivity() {
         binding.btnLogin.setOnClickListener {
             startActivity(intent)

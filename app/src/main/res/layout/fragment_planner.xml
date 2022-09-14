@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.planner.PlannerFragment">
+            tools:context=".ui.home.planner.PlannerFragment">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_exercise_plan"
@@ -36,21 +36,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.calefit.ui.custom.AutoClearRecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_exercise_list_today"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:orientation="vertical"
                 android:overScrollMode="never"
                 android:visibility="@{hasPlan ? View.VISIBLE : View.INVISIBLE}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_exercise_plan"
+                tools:itemCount="2"
                 tools:listitem="@layout/item_exercise_plan" />
-
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_load_exercise_list"
