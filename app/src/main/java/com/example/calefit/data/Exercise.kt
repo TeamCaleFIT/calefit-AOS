@@ -18,16 +18,16 @@ data class ExerciseList(
     @Serializable
     data class Sets(
         val id: String,
-        val cycle: String,
-        val weight: String,
+        val cycle: Int,
+        val weight: Int,
     ) : java.io.Serializable
 
     companion object {
         val DEFAULT_CYCLE_LIST = listOf(
             Sets(
                 id = "1",
-                cycle = "",
-                weight = ""
+                cycle = 0,
+                weight = 0
             )
         )
     }

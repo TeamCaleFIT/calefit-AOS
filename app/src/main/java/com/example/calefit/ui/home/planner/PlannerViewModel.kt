@@ -116,10 +116,10 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
             val set = setList[_userInput.innerPosition]
             val newSet = when (_userInput.category) {
                 InputCategory.CYCLE -> {
-                    set.copy(cycle = number.toString())
+                    set.copy(cycle = number)
                 }
                 InputCategory.WEIGHT -> {
-                    set.copy(weight = number.toString())
+                    set.copy(weight = number)
                 }
             }
             setList[_userInput.innerPosition] = newSet
@@ -137,6 +137,6 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
 
     companion object {
         private val DEFAULT_EXERCISE_LIST = ExerciseList(list = listOf())
-        private const val DEFAULT_CYCLE_VALUE = "0"
+        private const val DEFAULT_CYCLE_VALUE = 0
     }
 }
