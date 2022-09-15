@@ -27,9 +27,10 @@ class NestedInnerListViewAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExerciseList.Sets) {
             binding.item = item
+            observeEditText()
         }
 
-        fun observeEditText() {
+        private fun observeEditText() {
             binding.tvExercisePlanCycleCount.setOnClickListener {
                 val userClick = userClickPosition.copy(
                     innerPosition = adapterPosition,
@@ -62,7 +63,6 @@ class NestedInnerListViewAdapter(
 
     override fun onBindViewHolder(holder: NestedInnerListViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.observeEditText()
     }
 
     private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseList.Sets>() {

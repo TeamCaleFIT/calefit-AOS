@@ -46,9 +46,11 @@ class NestedOuterListViewAdapter(
                 setRecycledViewPool(viewPool)
             }
             innerAdapter.submitList(item.cycleList)
+
+            observeInnerRecyclerView()
         }
 
-        fun observeInnerRecyclerView() {
+        private fun observeInnerRecyclerView() {
             with(binding) {
                 btnCycleAdd.setOnClickListener {
                     btnCycleDelete.isEnabled = addCycle(adapterPosition)
@@ -86,7 +88,6 @@ class NestedOuterListViewAdapter(
 
     override fun onBindViewHolder(holder: NestedOuterListViewViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.observeInnerRecyclerView()
     }
 
     private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseList.Exercise>() {
