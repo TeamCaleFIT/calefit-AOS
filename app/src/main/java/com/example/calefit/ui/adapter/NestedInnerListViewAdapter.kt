@@ -1,11 +1,7 @@
 package com.example.calefit.ui.adapter
 
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,41 +9,43 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.databinding.ItemExerciseCycleSetupBinding
 import com.example.calefit.ui.common.InputCategory
+import com.example.calefit.ui.common.UserRecyclerviewClick
 
 class NestedInnerListViewAdapter(
-    private val userInput: (Int, Int, String, InputCategory) -> Unit,
-    private val outerPosition: Int,
+    private val userClickPosition: UserRecyclerviewClick,
+    private val userSelect: (UserRecyclerviewClick) -> Unit,
+    private val showBottomSheet: (InputCategory) -> Unit,
 ) : ListAdapter<ExerciseList.Sets, NestedInnerListViewAdapter.NestedInnerListViewHolder>(
     AsyncDifferConfig.Builder(ItemDiffUtil).build()
 ) {
 
     class NestedInnerListViewHolder(
         private val binding: ItemExerciseCycleSetupBinding,
-        private val userInput: (Int, Int, String, InputCategory) -> Unit,
-        private val outerPosition: Int
+        private val userClickPosition: UserRecyclerviewClick,
+        private val userSelect: (UserRecyclerviewClick) -> Unit,
+        private val showBottomSheet: (InputCategory) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExerciseList.Sets) {
             binding.item = item
         }
 
         fun observeEditText() {
-            binding.etExercisePlanCycleCount.addTextChangedListener {
-                Log.d("InnerAdapter", "cycle ${it?.toString() ?: ""}")
-                userInput(
-                    outerPosition,
-                    adapterPosition,
-                    it.toString(),
-                    InputCategory.CYCLE
+            binding.tvExercisePlanCycleCount.setOnClickListener {
+                val userClick = userClickPosition.copy(
+                    innerPosition = adapterPosition,
+                    category = InputCategory.CYCLE
                 )
+                userSelect(userClick)
+                showBottomSheet(InputCategory.CYCLE)
             }
-            binding.etExercisePlanCycleWeight.addTextChangedListener {
-                Log.d("InnerAdapter", "weight ${it?.toString() ?: ""}")
-                userInput(
-                    outerPosition,
-                    adapterPosition,
-                    it.toString(),
-                    InputCategory.WEIGHT
+
+            binding.tvExercisePlanCycleWeight.setOnClickListener {
+                val userClick = userClickPosition.copy(
+                    innerPosition = adapterPosition,
+                    category = InputCategory.WEIGHT
                 )
+                userSelect(userClick)
+                showBottomSheet(InputCategory.WEIGHT)
             }
         }
     }
@@ -56,8 +54,9 @@ class NestedInnerListViewAdapter(
         val inflater = LayoutInflater.from(parent.context)
         return NestedInnerListViewHolder(
             ItemExerciseCycleSetupBinding.inflate(inflater, parent, false),
-            userInput = userInput,
-            outerPosition = outerPosition
+            userClickPosition = userClickPosition,
+            userSelect = userSelect,
+            showBottomSheet = showBottomSheet
         )
     }
 

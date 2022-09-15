@@ -1,6 +1,5 @@
 package com.example.calefit.ui.home.planner
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -15,14 +15,12 @@ import androidx.navigation.fragment.navArgs
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
-import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.databinding.FragmentPlannerBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.decoration.NestedRecyclerDecoration
 import com.example.calefit.ui.home.NumberPickFragment
-import com.example.calefit.ui.home.main.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
@@ -42,19 +40,18 @@ class PlannerFragment : Fragment() {
             { position -> viewModel.addAdditionalCycle(position) },
             { position -> viewModel.removeCycle(position) },
             { position -> viewModel.removeExercise(position) },
-            { outerPosition, innerPosition, value, category ->
-                viewModel.getUserInputValue(
-                    outerPosition,
-                    innerPosition,
-                    value,
-                    category
-                )
-            }
+            { userClickPosition -> viewModel.setCurrentAdapterPositions(userClickPosition) },
+            { category -> this.startBottomSheetFragment(category) }
         )
     }
 
     private val nestedRecyclerItemDecoration by lazy {
         NestedRecyclerDecoration(DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        args.item?.let { viewModel.setExerciseList(it) }
     }
 
     override fun onCreateView(
@@ -68,7 +65,9 @@ class PlannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        args.item?.let { viewModel.setExerciseList(it) }
+        Log.d("PlannerFragment", "Planner onviewcreated ")
+        Log.d("PlannerFragment", "args : ${args.item?.list?.size?.toString()}")
+
         val navController = findNavController()
 
         binding.rvExerciseListToday.apply {
@@ -79,12 +78,8 @@ class PlannerFragment : Fragment() {
 
         selectExercise(navController)
         observeSelectionFragmentResult(navController)
+        getDataFromBottomSheetFragment()
         observeData()
-
-        binding.btnSaveExercise.setOnClickListener {
-            val fragment = NumberPickFragment.newInstance(InputCategory.CYCLE)
-            fragment.show(parentFragmentManager, fragment.tag)
-        }
     }
 
     private fun selectExercise(navController: NavController) {
@@ -111,6 +106,18 @@ class PlannerFragment : Fragment() {
                 plannerAdapter.submitList(exerciseList.list)
                 binding.hasPlan = exerciseList.list.isNotEmpty()
             }
+        }
+    }
+
+    private fun startBottomSheetFragment(category: InputCategory) {
+        val fragment = NumberPickFragment.newInstance(category)
+        fragment.show(parentFragmentManager, fragment.tag)
+    }
+
+    private fun getDataFromBottomSheetFragment() {
+        setFragmentResultListener("request_key") { _, bundle ->
+            val selectedNumber = bundle.getInt("number")
+            viewModel.setUserSelectedNumber(selectedNumber)
         }
     }
 

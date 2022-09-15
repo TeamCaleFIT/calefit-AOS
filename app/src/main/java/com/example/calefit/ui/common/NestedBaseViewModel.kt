@@ -13,10 +13,7 @@ abstract class NestedRecyclerBaseViewModel : ViewModel() {
 
     abstract fun removeCycle(position: Int): Boolean
 
-    abstract fun getUserInputValue(
-        outerPosition: Int,
-        innerPosition: Int,
-        value: String?,
-        category: InputCategory
-    )
+    abstract fun setCurrentAdapterPositions(userRecyclerviewClick: UserRecyclerviewClick)
+
+    abstract fun setUserSelectedNumber(number: Int)
 }

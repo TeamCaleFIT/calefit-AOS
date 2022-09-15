@@ -6,12 +6,14 @@ import androidx.recyclerview.widget.*
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.databinding.ItemExercisePlanBinding
 import com.example.calefit.ui.common.InputCategory
+import com.example.calefit.ui.common.UserRecyclerviewClick
 
 class NestedOuterListViewAdapter(
     private val addCycle: (Int) -> Boolean,
     private val removeCycle: (Int) -> Boolean,
     private val removeExercise: (Int) -> Unit,
-    private val userInput: (Int, Int, String, InputCategory) -> Unit
+    private val userSelect: (UserRecyclerviewClick) -> Unit,
+    private val showBottomSheet: (InputCategory) -> Unit,
 ) : ListAdapter<ExerciseList.Exercise, NestedOuterListViewAdapter.NestedOuterListViewViewHolder>(
     AsyncDifferConfig.Builder(ItemDiffUtil).build()
 ) {
@@ -23,7 +25,8 @@ class NestedOuterListViewAdapter(
         private val addCycle: (Int) -> Boolean,
         private val removeCycle: (Int) -> Boolean,
         private val removeExercise: (Int) -> Unit,
-        private val userInput: (Int, Int, String, InputCategory) -> Unit,
+        private val userSelect: (UserRecyclerviewClick) -> Unit,
+        private val showBottomSheet: (InputCategory) -> Unit,
         private val innerLayoutManager: LinearLayoutManager,
         private val viewPool: RecyclerView.RecycledViewPool
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -32,8 +35,9 @@ class NestedOuterListViewAdapter(
             binding.item = item
 
             val innerAdapter = NestedInnerListViewAdapter(
-                userInput = userInput,
-                outerPosition = adapterPosition
+                userClickPosition = UserRecyclerviewClick(adapterPosition),
+                userSelect = userSelect,
+                showBottomSheet = showBottomSheet
             )
 
             binding.rvExerciseCycle.apply {
@@ -73,7 +77,8 @@ class NestedOuterListViewAdapter(
             addCycle = addCycle,
             removeCycle = removeCycle,
             removeExercise = removeExercise,
-            userInput = userInput,
+            userSelect = userSelect,
+            showBottomSheet = showBottomSheet,
             innerLayoutManager = layoutManager,
             viewPool = viewPool,
         )
