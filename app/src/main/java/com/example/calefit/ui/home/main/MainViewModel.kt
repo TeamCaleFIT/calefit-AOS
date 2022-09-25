@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.calefit.data.Aggregate
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.usecase.GetExerciseDetailUseCase
-import com.example.calefit.usecase.GetSpecificDateExerciseListOrNullUseCase
+import com.example.calefit.usecase.GetSpecificDateExerciseListOrEmptyListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     getExerciseDetailUseCase: GetExerciseDetailUseCase,
-    private val getSpecificDateExerciseListOrNullUseCase: GetSpecificDateExerciseListOrNullUseCase
+    private val getSpecificDateExerciseListOrEmptyListUseCase: GetSpecificDateExerciseListOrEmptyListUseCase
 ) : ViewModel() {
 
     private val _clickedDate = MutableStateFlow("")
@@ -49,7 +49,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun getClickedExerciseListOrNull(): ExerciseList? {
-        return when (val data = getSpecificDateExerciseListOrNullUseCase(clickedDate.value)) {
+        return when (val data = getSpecificDateExerciseListOrEmptyListUseCase(clickedDate.value)) {
             is Aggregate.Success -> {
                 dataLoading.value = false
                 data.data

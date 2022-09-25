@@ -36,8 +36,9 @@ class HomeActivity : AppCompatActivity() {
         binding.navBottom.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.plannerFragment -> hideBottomNav()
-                R.id.exerciseSelectFragment -> hideBottomNav()
+                R.id.plannerFragment,
+                R.id.exerciseSelectFragment,
+                R.id.templateFragment,
                 R.id.exerciseDetailFragment -> hideBottomNav()
                 else -> showBottomNav()
             }
