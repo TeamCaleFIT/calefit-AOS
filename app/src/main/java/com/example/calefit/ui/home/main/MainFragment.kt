@@ -82,7 +82,7 @@ class MainFragment : Fragment() {
                 navController.navigate(R.id.action_mainFragment_to_plannerFragment)
             }
             btnEditExercise.setOnClickListener {
-                val data = MainFragmentDirections.Companion.actionMainFragmentToPlannerFragment(
+                val data = MainFragmentDirections.actionMainFragmentToPlannerFragment(
                     viewModel.getClickedExerciseListOrNull()
                 )
                 navController.navigate(data)

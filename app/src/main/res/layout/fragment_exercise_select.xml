@@ -37,7 +37,7 @@
                     android:textAppearance="@style/TextLabel" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.example.calefit.ui.custom.AutoClearRecyclerView
                 android:id="@+id/rv_exercise_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

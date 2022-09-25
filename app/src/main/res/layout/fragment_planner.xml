@@ -52,14 +52,14 @@
                 tools:listitem="@layout/item_exercise_plan" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_load_exercise_list"
+                android:id="@+id/btn_load_exercise_template_list"
                 style="@style/ExerciseListBody"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/extra_button_background_"
+                android:background="@drawable/extra_button_background"
                 android:text="@string/load_exercise_list"
                 app:layout_constraintEnd_toStartOf="@id/btn_save_exercise"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,12 +73,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/extra_button_background_"
+                android:background="@drawable/extra_button_background"
                 android:enabled="true"
                 android:text="@string/save_exercise_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_load_exercise_list" />
+                app:layout_constraintTop_toBottomOf="@id/btn_load_exercise_template_list" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_save_as_template"
@@ -88,7 +88,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/extra_button_background_"
+                android:background="@drawable/extra_button_background"
                 android:enabled="false"
                 android:text="@string/save_exercise_list_as_template"
                 app:layout_constraintEnd_toEndOf="parent"

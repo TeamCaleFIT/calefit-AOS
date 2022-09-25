@@ -29,7 +29,8 @@
             app:launchSingleTop="true" />
         <action
             android:id="@+id/action_plannerFragment_to_templateFragment"
-            app:destination="@id/templateFragment" />
+            app:destination="@id/templateFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_plannerFragment_to_mainFragment"
             app:destination="@id/mainFragment"
@@ -50,7 +51,8 @@
             app:destination="@id/exerciseDetailFragment" />
         <action
             android:id="@+id/action_templateFragment_to_plannerFragment"
-            app:destination="@id/plannerFragment" />
+            app:destination="@id/plannerFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/exerciseSelectFragment"
@@ -73,5 +75,8 @@
         <action
             android:id="@+id/action_exerciseDetailFragment_to_exerciseSelectFragment"
             app:destination="@id/exerciseSelectFragment" />
+        <argument
+            android:name="templateDate"
+            app:argType="string" />
     </fragment>
 </navigation>

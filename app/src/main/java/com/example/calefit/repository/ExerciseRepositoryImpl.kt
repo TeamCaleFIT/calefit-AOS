@@ -40,6 +40,7 @@ class ExerciseRepositoryImpl @Inject constructor(
         ),
         ExerciseList(
             date = "2022-09-10",
+            templateName = "템플릿 2",
             list = listOf(
                 ExerciseList.Exercise(
                     id = "1",
@@ -52,6 +53,7 @@ class ExerciseRepositoryImpl @Inject constructor(
         ),
         ExerciseList(
             date = "2022-09-30",
+            templateName = "템플릿 1",
             list = listOf(
                 ExerciseList.Exercise(
                     id = "1",

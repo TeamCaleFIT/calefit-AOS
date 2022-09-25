@@ -3,8 +3,10 @@
     <style name="Base.Theme.Calefit" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-<!--        <item name="android:background">@color/white</item>-->
+        <!--        <item name="android:background">@color/white</item>-->
         <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+<!--        <item name="android:windowTranslucentNavigation">true</item>-->
     </style>
 
     <style name="Theme.Calefit" parent="Base.Theme.Calefit" />

@@ -71,5 +71,7 @@
     <string name="edit_exercise">편집하기</string>
     <string name="weight_volume_format">%s vol</string>
     <string name="save_number_btn_title">선택하기</string>
+    <string name="template_exercise_count">운동종목 %d개</string>
+    <string name="save_exercise">저장하기</string>
 
 </resources>
