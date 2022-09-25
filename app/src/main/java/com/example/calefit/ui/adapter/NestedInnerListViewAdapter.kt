@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.databinding.ItemExerciseCycleSetupBinding
 import com.example.calefit.ui.common.InputCategory
-import com.example.calefit.ui.common.UserRecyclerviewClick
+import com.example.calefit.data.UserRecyclerviewClick
 
 class NestedInnerListViewAdapter(
     private val userClickPosition: UserRecyclerviewClick,

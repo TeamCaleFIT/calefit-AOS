@@ -2,10 +2,11 @@ package com.example.calefit.ui.common
 
 import androidx.lifecycle.ViewModel
 import com.example.calefit.data.ExerciseSelection
+import com.example.calefit.data.UserRecyclerviewClick
 
 abstract class NestedRecyclerBaseViewModel : ViewModel() {
 
-    abstract fun addAdditionalExercise(exerciseList: List<ExerciseSelection>)
+    abstract fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>)
 
     abstract fun addAdditionalCycle(position: Int): Boolean
 

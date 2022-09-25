@@ -5,7 +5,7 @@ import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.common.NestedRecyclerBaseViewModel
-import com.example.calefit.ui.common.UserRecyclerviewClick
+import com.example.calefit.data.UserRecyclerviewClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,14 +25,14 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
 
     private lateinit var _userInput: UserRecyclerviewClick
 
-    override fun addAdditionalExercise(exerciseList: List<ExerciseSelection>) {
-        if (exerciseList.isEmpty()) {
+    override fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>) {
+        if (selectedExerciseList.isEmpty()) {
             return
         }
 
         _exercisePlan.update { currentList ->
             val newList = currentList.list.toMutableList()
-            exerciseList.forEach { selectedExercise ->
+            selectedExerciseList.forEach { selectedExercise ->
                 newList.add(
                     ExerciseList.Exercise(
                         id = (newList.size + 1).toString(),
