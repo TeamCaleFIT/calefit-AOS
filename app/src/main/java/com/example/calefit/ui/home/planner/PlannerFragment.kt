@@ -78,6 +78,7 @@ class PlannerFragment : Fragment() {
 
         selectExercise(navController)
         observeSelectionFragmentResult(navController)
+        goToTemplateFragment(navController)
         getDataFromBottomSheetFragment()
         observeData()
     }
@@ -120,6 +121,14 @@ class PlannerFragment : Fragment() {
             viewModel.setUserSelectedNumber(selectedNumber)
         }
     }
+
+    private fun goToTemplateFragment(navController: NavController) {
+        binding.btnLoadExerciseTemplateList.setOnClickListener {
+            navController.navigate(R.id.action_plannerFragment_to_templateFragment)
+        }
+    }
+
+    //TODO saveExerciseData when the save button clicked and save it in the database when the revision is finished
 
     companion object {
         private const val DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING = 50
