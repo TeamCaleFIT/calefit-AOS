@@ -127,12 +127,6 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
             exerciseList[_userInput.outerPosition] = newExercise
             currentList.copy(list = exerciseList)
         }
-
-        Log.d(
-            "PlannerViewModel",
-            "cycle : ${_exercisePlan.value.list[_userInput.outerPosition].cycleList[_userInput.innerPosition].cycle}   " +
-                    "weight : ${_exercisePlan.value.list[_userInput.outerPosition].cycleList[_userInput.innerPosition].weight}"
-        )
     }
 
     companion object {
