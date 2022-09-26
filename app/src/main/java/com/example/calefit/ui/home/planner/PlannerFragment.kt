@@ -20,7 +20,7 @@ import com.example.calefit.databinding.FragmentPlannerBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.decoration.NestedRecyclerDecoration
-import com.example.calefit.ui.home.NumberPickFragment
+import com.example.calefit.ui.common.NumberPickFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion

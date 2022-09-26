@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.calefit.R
@@ -21,7 +20,7 @@ import com.example.calefit.databinding.FragmentExerciseDetailBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.decoration.NestedRecyclerDecoration
-import com.example.calefit.ui.home.NumberPickFragment
+import com.example.calefit.ui.common.NumberPickFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
