@@ -81,11 +81,16 @@ class MainFragment : Fragment() {
             btnMakeExerciseList.setOnClickListener {
                 navController.navigate(R.id.action_mainFragment_to_plannerFragment)
             }
+
             btnEditExercise.setOnClickListener {
-                val data = MainFragmentDirections.actionMainFragmentToPlannerFragment(
-                    viewModel.getClickedExerciseListOrNull()
-                )
-                navController.navigate(data)
+                viewLifecycleOwner.repeatOnLifecycleExtension {
+                    viewModel.clickedDate.collect {
+                        val data = MainFragmentDirections.actionMainFragmentToPlannerFragment(
+                            it
+                        )
+                        navController.navigate(data)
+                    }
+                }
             }
         }
     }

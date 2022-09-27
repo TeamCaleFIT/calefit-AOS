@@ -1,11 +1,13 @@
 package com.example.calefit.ui.home.planner
 
 import android.util.Log
+import com.example.calefit.data.Aggregate
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.common.NestedRecyclerBaseViewModel
 import com.example.calefit.data.UserRecyclerviewClick
+import com.example.calefit.usecase.GetSpecificDateExerciseListOrEmptyListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,9 +16,9 @@ import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
-class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
-
-    private val _todayDate = LocalDate.now()
+class PlannerViewModel @Inject constructor(
+    private val getSpecificDateExerciseListOrEmptyListUseCase: GetSpecificDateExerciseListOrEmptyListUseCase
+) : NestedRecyclerBaseViewModel() {
 
     private val _exercisePlan = MutableStateFlow(DEFAULT_EXERCISE_LIST)
     val exercisePlan = _exercisePlan.asStateFlow()
@@ -24,6 +26,21 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
     private lateinit var _userInputExercisePlan: ExerciseList
 
     private lateinit var _userInput: UserRecyclerviewClick
+
+    fun setExerciseList(date: String) {
+        if (date.isEmpty()) {
+            return
+        }
+
+        when (val data = getSpecificDateExerciseListOrEmptyListUseCase(date)) {
+            is Aggregate.Success -> {
+                _exercisePlan.value = data.data
+            }
+            else -> {
+                _exercisePlan.value = DEFAULT_EXERCISE_LIST
+            }
+        }
+    }
 
     override fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>) {
         if (selectedExerciseList.isEmpty()) {
@@ -94,10 +111,6 @@ class PlannerViewModel @Inject constructor() : NestedRecyclerBaseViewModel() {
         }
 
         return exercisePlan.value.list[position].cycleList.size > 1
-    }
-
-    fun setExerciseList(data: ExerciseList) {
-        _exercisePlan.value = data
     }
 
     override fun setCurrentAdapterPositions(userClickPosition: UserRecyclerviewClick) {

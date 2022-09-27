@@ -36,10 +36,9 @@
             app:destination="@id/mainFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
         <argument
-            android:name="item"
-            app:argType="com.example.calefit.data.ExerciseList"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:name="itemDate"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/templateFragment"

@@ -51,7 +51,7 @@ class PlannerFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        args.item?.let { viewModel.setExerciseList(it) }
+        viewModel.setExerciseList(args.itemDate)
     }
 
     override fun onCreateView(
@@ -65,8 +65,6 @@ class PlannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("PlannerFragment", "Planner onviewcreated ")
-        Log.d("PlannerFragment", "args : ${args.item?.list?.size?.toString()}")
 
         val navController = findNavController()
 

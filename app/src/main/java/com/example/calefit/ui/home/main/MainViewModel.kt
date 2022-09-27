@@ -47,21 +47,4 @@ class MainViewModel @Inject constructor(
         require(date.isNotEmpty())
         _clickedDate.value = date
     }
-
-    fun getClickedExerciseListOrNull(): ExerciseList? {
-        return when (val data = getSpecificDateExerciseListOrEmptyListUseCase(clickedDate.value)) {
-            is Aggregate.Success -> {
-                dataLoading.value = false
-                data.data
-            }
-            is Aggregate.Error -> {
-                dataLoading.value = false
-                null
-            }
-            is Aggregate.Loading -> {
-                dataLoading.value = true
-                null
-            }
-        }
-    }
 }
