@@ -7,50 +7,58 @@ import com.example.calefit.data.Aggregate
 import com.example.calefit.data.ExerciseTemplateSummary
 import com.example.calefit.usecase.GetExerciseTemplateListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TemplateViewModel @Inject constructor(
-    getExerciseTemplateListUseCase: GetExerciseTemplateListUseCase
+    private val getExerciseTemplateListUseCase: GetExerciseTemplateListUseCase
 ) : ViewModel() {
 
-    private val _templateSummaryList = MutableStateFlow(
-        getExerciseTemplateListUseCase()
-    )
+    private val _templateSummaryList: MutableStateFlow<List<ExerciseTemplateSummary>> =
+        MutableStateFlow(listOf())
 
-    val templateSummaryList = _templateSummaryList.map {
-        when (it) {
+    val templateSummaryList = _templateSummaryList.asStateFlow()
+
+    val dataLoading = MutableStateFlow(false)
+
+    init {
+        getTemplateDataFromRepository()
+    }
+
+    private fun getTemplateDataFromRepository() {
+        when (val data = getExerciseTemplateListUseCase()) {
             is Aggregate.Success -> {
                 dataLoading.value = false
-                it.data
+                _templateSummaryList.value = data.data
             }
             is Aggregate.Error -> {
                 dataLoading.value = false
-                emptyList()
+                _templateSummaryList.value = emptyList()
             }
             is Aggregate.Loading -> {
                 dataLoading.value = true
-                emptyList()
+                _templateSummaryList.value = emptyList()
             }
         }
     }
 
-    val dataLoading = MutableStateFlow(false)
-
     private lateinit var _selectedTemplate: ExerciseTemplateSummary
 
     fun selectTemplate(position: Int) {
-        viewModelScope.launch {
-            templateSummaryList.collect {
-                if (it.isNotEmpty()) {
-                    _selectedTemplate = it[position]
+        _selectedTemplate = _templateSummaryList.value[position]
+
+        _templateSummaryList.update { currentList ->
+            val newList = mutableListOf<ExerciseTemplateSummary>()
+            currentList.forEachIndexed { index, summary ->
+                if (index == position) {
+                    newList.add(summary.copy(isClicked = true))
+                    return@forEachIndexed
                 }
+                newList.add(summary.copy(isClicked = false))
             }
+            newList
         }
     }
 }

@@ -1,8 +1,10 @@
 package com.example.calefit.ui.adapter
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
@@ -12,11 +14,13 @@ import com.example.calefit.R
 import com.example.calefit.data.ExerciseTemplateSummary
 import com.example.calefit.databinding.ItemExerciseTemplateBinding
 import com.example.calefit.ui.home.template.TemplateFragmentDirections
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.zip.Inflater
 
 class ExerciseTemplateAdapter(
+    private val context: Context?,
     private val navController: NavController,
-    private val selectTemplate: (Int) -> Unit
+    private val selectTemplate: (Int) -> Unit,
 ) :
     ListAdapter<ExerciseTemplateSummary, ExerciseTemplateAdapter.ExerciseTemplateViewHolder>(
         ItemDiffUtil
@@ -24,13 +28,15 @@ class ExerciseTemplateAdapter(
 
     class ExerciseTemplateViewHolder(
         private val binding: ItemExerciseTemplateBinding,
+        private val context: Context?,
         private val navController: NavController,
-        private val selectTemplate: (Int) -> Unit
+        private val selectTemplate: (Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExerciseTemplateSummary) {
             binding.item = item
             goToExerciseDetailFragment(item)
             getClickedTemplate()
+            changeBackground(item.isClicked, context)
         }
 
         private fun getClickedTemplate() {
@@ -49,6 +55,15 @@ class ExerciseTemplateAdapter(
                 navController.navigate(data)
             }
         }
+
+        private fun changeBackground(isClicked: Boolean, context: Context?) {
+            if (isClicked) {
+                context?.let {
+                    binding.clTemplate.background =
+                        ContextCompat.getDrawable(context, R.drawable.template_background_blue)
+                }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExerciseTemplateViewHolder {
@@ -56,7 +71,8 @@ class ExerciseTemplateAdapter(
         return ExerciseTemplateViewHolder(
             ItemExerciseTemplateBinding.inflate(inflater, parent, false),
             navController = navController,
-            selectTemplate = selectTemplate
+            selectTemplate = selectTemplate,
+            context = context
         )
     }
 

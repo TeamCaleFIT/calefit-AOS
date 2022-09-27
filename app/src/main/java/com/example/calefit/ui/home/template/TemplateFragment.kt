@@ -14,6 +14,7 @@ import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
 import com.example.calefit.databinding.FragmentTemplateBinding
 import com.example.calefit.ui.adapter.ExerciseTemplateAdapter
+import com.example.calefit.ui.decoration.NestedRecyclerDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,10 +24,10 @@ class TemplateFragment : Fragment() {
 
     private val viewModel: TemplateViewModel by viewModels()
 
-    private val templateAdapter by lazy {
-        ExerciseTemplateAdapter(
-            navController = findNavController()
-        ) { position -> viewModel.selectTemplate(position) }
+    private lateinit var templateAdapter: ExerciseTemplateAdapter
+
+    private val recyclerDecoration by lazy {
+        NestedRecyclerDecoration(15)
     }
 
     override fun onCreateView(
@@ -41,8 +42,14 @@ class TemplateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        templateAdapter = ExerciseTemplateAdapter(
+            context = context,
+            navController = findNavController()
+        ) { position -> viewModel.selectTemplate(position) }
+
         binding.rvExerciseTemplate.apply {
             adapter = templateAdapter
+            addItemDecoration(recyclerDecoration)
         }
 
         observeData()
