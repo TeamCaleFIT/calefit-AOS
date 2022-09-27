@@ -10,14 +10,6 @@
             type="com.example.calefit.data.ExerciseTemplateSummary" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/template_background"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="3dp"
-        app:cardUseCompatPadding="true">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_template"
             android:layout_width="match_parent"
@@ -92,5 +84,4 @@
                 app:tint="@color/gray3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 </layout>
