@@ -14,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     getExerciseDetailUseCase: GetExerciseDetailUseCase,
-    private val getSpecificDateExerciseListOrEmptyListUseCase: GetSpecificDateExerciseListOrEmptyListUseCase
 ) : ViewModel() {
 
     private val _clickedDate = MutableStateFlow("")
