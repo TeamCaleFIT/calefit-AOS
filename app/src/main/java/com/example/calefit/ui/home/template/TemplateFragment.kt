@@ -53,6 +53,7 @@ class TemplateFragment : Fragment() {
         }
 
         observeData()
+        selectExerciseTemplateToPlanning()
     }
 
     private fun observeData() {
@@ -60,6 +61,15 @@ class TemplateFragment : Fragment() {
             viewModel.templateSummaryList.collect {
                 templateAdapter.submitList(it)
             }
+        }
+    }
+
+    private fun selectExerciseTemplateToPlanning() {
+        binding.btnSelectExerciseTemplate.setOnClickListener {
+            val data = TemplateFragmentDirections.actionTemplateFragmentToPlannerFragment(
+                viewModel.getSelectedDate()
+            )
+            findNavController().navigate(data)
         }
     }
 }
