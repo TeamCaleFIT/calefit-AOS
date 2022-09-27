@@ -7,5 +7,5 @@ data class ExerciseTemplateSummary(
     val templateTitle: String,
     val exerciseCount: Int,
     val exerciseDate: String,
-    var isClicked: Boolean = false
+    val isClicked: Boolean = false
 )
