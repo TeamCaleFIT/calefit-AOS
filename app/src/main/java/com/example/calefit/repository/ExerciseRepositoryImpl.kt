@@ -14,6 +14,7 @@ class ExerciseRepositoryImpl @Inject constructor(
     private val exerciseList = listOf(
         ExerciseList(
             date = "2022-09-09",
+            templateName = "템플릿 3",
             list = listOf(
                 ExerciseList.Exercise(
                     id = "1",

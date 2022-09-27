@@ -52,11 +52,11 @@ class TemplateViewModel @Inject constructor(
         _templateSummaryList.update { currentList ->
             val newList = mutableListOf<ExerciseTemplateSummary>()
             currentList.forEachIndexed { index, summary ->
-                if (index == position) {
+                if (index == position && !currentList[index].isClicked) {
                     newList.add(summary.copy(isClicked = true))
-                    return@forEachIndexed
+                } else {
+                    newList.add(summary.copy(isClicked = false))
                 }
-                newList.add(summary.copy(isClicked = false))
             }
             newList
         }

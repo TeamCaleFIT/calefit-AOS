@@ -62,6 +62,11 @@ class ExerciseTemplateAdapter(
                     binding.clTemplate.background =
                         ContextCompat.getDrawable(context, R.drawable.template_background_blue)
                 }
+            } else {
+                context?.let {
+                    binding.clTemplate.background =
+                        ContextCompat.getDrawable(context, R.drawable.template_background)
+                }
             }
         }
     }
