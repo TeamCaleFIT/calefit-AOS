@@ -22,7 +22,7 @@
         android:id="@+id/plannerFragment"
         android:name="com.example.calefit.ui.home.planner.PlannerFragment"
         android:label="PlannerFragment"
-        tools:layout="@layout/fragment_planner" >
+        tools:layout="@layout/fragment_planner">
         <action
             android:id="@+id/action_plannerFragment_to_exerciseSelectFragment"
             app:destination="@id/exerciseSelectFragment"
@@ -37,14 +37,14 @@
             app:enterAnim="@anim/nav_default_enter_anim" />
         <argument
             android:name="itemDate"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/templateFragment"
         android:name="com.example.calefit.ui.home.template.TemplateFragment"
         android:label="TemplateFragment"
-        tools:layout="@layout/fragment_template" >
+        tools:layout="@layout/fragment_template">
         <action
             android:id="@+id/action_templateFragment_to_exerciseDetailFragment"
             app:destination="@id/exerciseDetailFragment" />
@@ -57,7 +57,7 @@
         android:id="@+id/exerciseSelectFragment"
         android:name="com.example.calefit.ui.home.select.ExerciseSelectFragment"
         android:label="ExerciseSelectFragment"
-        tools:layout="@layout/fragment_exercise_select" >
+        tools:layout="@layout/fragment_exercise_select">
         <action
             android:id="@+id/action_exerciseSelectFragment_to_plannerFragment"
             app:destination="@id/plannerFragment"
@@ -70,7 +70,7 @@
         android:id="@+id/exerciseDetailFragment"
         android:name="com.example.calefit.ui.home.detali.ExerciseDetailFragment"
         android:label="ExerciseDetailFragment"
-        tools:layout="@layout/fragment_exercise_detail" >
+        tools:layout="@layout/fragment_exercise_detail">
         <action
             android:id="@+id/action_exerciseDetailFragment_to_exerciseSelectFragment"
             app:destination="@id/exerciseSelectFragment" />
