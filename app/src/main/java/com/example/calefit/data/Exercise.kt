@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 data class ExerciseList(
     val date: String = "",
     var templateName: String = "",
-    var list: List<Exercise>,
+    val list: List<Exercise> = emptyList(),
 ) : java.io.Serializable {
 
     @Serializable
