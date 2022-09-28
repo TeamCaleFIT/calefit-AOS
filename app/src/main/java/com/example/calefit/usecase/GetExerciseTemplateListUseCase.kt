@@ -27,6 +27,7 @@ class GetExerciseTemplateListUseCase @Inject constructor(
                         )
                     }
                 }
+                templateList.sortBy { it.templateTitle }
                 Aggregate.Success(templateList)
             }
             else -> {
