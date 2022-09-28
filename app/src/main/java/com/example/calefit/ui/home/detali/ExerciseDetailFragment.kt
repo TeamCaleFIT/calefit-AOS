@@ -94,7 +94,7 @@ class ExerciseDetailFragment : Fragment() {
 
     private fun observeData() {
         viewLifecycleOwner.repeatOnLifecycleExtension {
-            viewModel.exerciseList.collect { exerciseList ->
+            viewModel.exercisePlan.collect { exerciseList ->
                 detailAdapter.submitList(exerciseList.list)
                 binding.templateTitle = exerciseList.templateName
             }
