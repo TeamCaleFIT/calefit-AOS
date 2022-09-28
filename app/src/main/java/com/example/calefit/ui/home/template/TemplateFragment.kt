@@ -27,7 +27,7 @@ class TemplateFragment : Fragment() {
     private lateinit var templateAdapter: ExerciseTemplateAdapter
 
     private val recyclerDecoration by lazy {
-        NestedRecyclerDecoration(15)
+        NestedRecyclerDecoration(NestedRecyclerDecoration.DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING)
     }
 
     override fun onCreateView(

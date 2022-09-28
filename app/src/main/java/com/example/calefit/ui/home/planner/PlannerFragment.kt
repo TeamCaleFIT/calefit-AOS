@@ -46,7 +46,7 @@ class PlannerFragment : Fragment() {
     }
 
     private val nestedRecyclerItemDecoration by lazy {
-        NestedRecyclerDecoration(DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING)
+        NestedRecyclerDecoration(NestedRecyclerDecoration.DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,8 +127,4 @@ class PlannerFragment : Fragment() {
     }
 
     //TODO saveExerciseData when the save button clicked and save it in the database when the revision is finished
-
-    companion object {
-        private const val DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING = 50
-    }
 }

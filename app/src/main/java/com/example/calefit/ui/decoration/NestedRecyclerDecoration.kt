@@ -17,4 +17,8 @@ class NestedRecyclerDecoration(
         super.getItemOffsets(outRect, view, parent, state)
         outRect.top = bottomPadding
     }
+
+    companion object {
+        const val DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING = 50
+    }
 }
