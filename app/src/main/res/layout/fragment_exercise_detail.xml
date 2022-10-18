@@ -5,56 +5,83 @@
 
     <data>
 
+        <variable
+            name="templateTitle"
+            type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.home.detali.ExerciseDetailFragment">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_template_title"
-            style="@style/ExercisePlanTitle"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/template_background"
-            android:gravity="center|center_vertical"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="템플릿1" />
+            tools:context=".ui.home.detali.ExerciseDetailFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_template_exercise_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_template_title"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_exercise_plan" />
+            <TextView
+                android:id="@+id/tv_template_title"
+                style="@style/ExercisePlanTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/template_background"
+                android:gravity="center|center_vertical"
+                android:padding="15dp"
+                android:text="@{templateTitle}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="템플릿1" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/ExercisePlanBody"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/template_background"
-            android:padding="5dp"
-            android:gravity="center|center_vertical"
-            android:text="@string/add_extra_exercise"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_template_exercise_list" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_template_exercise_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_template_title"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_exercise_plan" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_exercise_add"
+                style="@style/ExerciseListBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/extra_button_background"
+                android:gravity="center|center_vertical"
+                android:padding="5dp"
+                android:text="@string/add_extra_exercise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_template_exercise_list" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save_exercise_template"
+                style="@style/ExerciseListBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/extra_button_background"
+                android:gravity="center|center_vertical"
+                android:padding="5dp"
+                android:text="@string/save_exercise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_exercise_add" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

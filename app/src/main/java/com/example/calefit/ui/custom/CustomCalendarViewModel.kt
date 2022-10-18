@@ -1,7 +1,6 @@
 package com.example.calefit.ui.custom
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.calefit.R
 import com.example.calefit.data.Aggregate
@@ -69,7 +68,6 @@ class CustomCalendarViewModel @Inject constructor(
             newList[position] = newData
             _date.value = newData.date
             clickedDate = newData.date
-            Log.d("ViewModel", clickedDate)
             newList
         }
     }

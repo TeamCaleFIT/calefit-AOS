@@ -15,4 +15,5 @@
     <color name="gradient1End">#B2FFDA</color>
     <color name="charcoal">#36454f</color>
     <color name="dark_gray">#abb0b8</color>
+    <color name="default_background">#fffffbfd</color>
 </resources>

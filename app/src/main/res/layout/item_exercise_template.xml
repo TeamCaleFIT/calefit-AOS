@@ -5,17 +5,13 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.example.calefit.data.ExerciseTemplateSummary" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/template_background"
-        app:cardElevation="3dp"
-        app:cardCornerRadius="15dp"
-        app:cardUseCompatPadding="true">
-
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_template"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/template_background">
@@ -38,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@{item.templateTitle}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -60,6 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:text="@{@string/template_exercise_count(item.exerciseCount)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_exercise_template_title"
@@ -86,5 +84,4 @@
                 app:tint="@color/gray3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 </layout>

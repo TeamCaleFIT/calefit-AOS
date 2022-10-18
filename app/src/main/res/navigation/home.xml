@@ -22,41 +22,42 @@
         android:id="@+id/plannerFragment"
         android:name="com.example.calefit.ui.home.planner.PlannerFragment"
         android:label="PlannerFragment"
-        tools:layout="@layout/fragment_planner" >
+        tools:layout="@layout/fragment_planner">
         <action
             android:id="@+id/action_plannerFragment_to_exerciseSelectFragment"
             app:destination="@id/exerciseSelectFragment"
             app:launchSingleTop="true" />
         <action
             android:id="@+id/action_plannerFragment_to_templateFragment"
-            app:destination="@id/templateFragment" />
+            app:destination="@id/templateFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_plannerFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
         <argument
-            android:name="item"
-            app:argType="com.example.calefit.data.ExerciseList"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:name="itemDate"
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/templateFragment"
         android:name="com.example.calefit.ui.home.template.TemplateFragment"
         android:label="TemplateFragment"
-        tools:layout="@layout/fragment_template" >
+        tools:layout="@layout/fragment_template">
         <action
             android:id="@+id/action_templateFragment_to_exerciseDetailFragment"
             app:destination="@id/exerciseDetailFragment" />
         <action
             android:id="@+id/action_templateFragment_to_plannerFragment"
-            app:destination="@id/plannerFragment" />
+            app:destination="@id/plannerFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/exerciseSelectFragment"
         android:name="com.example.calefit.ui.home.select.ExerciseSelectFragment"
         android:label="ExerciseSelectFragment"
-        tools:layout="@layout/fragment_exercise_select" >
+        tools:layout="@layout/fragment_exercise_select">
         <action
             android:id="@+id/action_exerciseSelectFragment_to_plannerFragment"
             app:destination="@id/plannerFragment"
@@ -69,9 +70,12 @@
         android:id="@+id/exerciseDetailFragment"
         android:name="com.example.calefit.ui.home.detali.ExerciseDetailFragment"
         android:label="ExerciseDetailFragment"
-        tools:layout="@layout/fragment_exercise_detail" >
+        tools:layout="@layout/fragment_exercise_detail">
         <action
             android:id="@+id/action_exerciseDetailFragment_to_exerciseSelectFragment"
             app:destination="@id/exerciseSelectFragment" />
+        <argument
+            android:name="templateDate"
+            app:argType="string" />
     </fragment>
 </navigation>

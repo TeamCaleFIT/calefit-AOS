@@ -1,4 +1,4 @@
-package com.example.calefit.data.dto
+package com.example.calefit.data.remotedto
 
 data class CalendarDateListDTO(
     val date: String?,

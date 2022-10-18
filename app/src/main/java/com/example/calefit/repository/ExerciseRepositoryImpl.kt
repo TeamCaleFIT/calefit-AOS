@@ -13,60 +13,63 @@ class ExerciseRepositoryImpl @Inject constructor(
 
     private val exerciseList = listOf(
         ExerciseList(
-            date = "2022-08-09",
+            date = "2022-09-09",
+            templateName = "템플릿 3",
             list = listOf(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "스쿼트",
                     cycleList = listOf(
-                        ExerciseList.Sets("1", "3", "30")
+                        ExerciseList.Sets("1", 3, 30)
                     ),
                 ),
                 ExerciseList.Exercise(
                     id = "2",
                     name = "덤벨",
                     cycleList = listOf(
-                        ExerciseList.Sets("1", "2", "100")
+                        ExerciseList.Sets("1", 2, 100)
                     )
                 ),
                 ExerciseList.Exercise(
                     id = "3",
                     name = "벤치프레스",
                     cycleList = listOf(
-                        ExerciseList.Sets("1", "5", "400")
+                        ExerciseList.Sets("1", 5, 400)
                     )
                 )
             )
         ),
         ExerciseList(
-            date = "2022-08-10",
+            date = "2022-09-10",
+            templateName = "템플릿 2",
             list = listOf(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "런지",
                     cycleList = listOf(
-                        ExerciseList.Sets("1", "3", "320")
+                        ExerciseList.Sets("1", 3, 320)
                     )
                 )
             )
         ),
         ExerciseList(
-            date = "2022-08-30",
+            date = "2022-09-30",
+            templateName = "템플릿 1",
             list = listOf(
                 ExerciseList.Exercise(
                     id = "1",
                     name = "벤치프레스",
                     cycleList = listOf(
-                        ExerciseList.Sets("1", "3", "200"),
-                        ExerciseList.Sets("2", "5", "220")
+                        ExerciseList.Sets("1", 3, 200),
+                        ExerciseList.Sets("2", 5, 220)
                     )
                 ),
                 ExerciseList.Exercise(
                     id = "2",
                     name = "덤벨프레스",
                     cycleList = listOf(
-                        ExerciseList.Sets("1", "2", "180"),
-                        ExerciseList.Sets("2", "1", "120")
+                        ExerciseList.Sets("1", 2, 180),
+                        ExerciseList.Sets("2", 1, 120)
                     )
                 )
             )
@@ -89,6 +92,4 @@ class ExerciseRepositoryImpl @Inject constructor(
 
         return Aggregate.Success(map)
     }
-
-
 }

@@ -58,6 +58,7 @@ class LoginFragment @Inject constructor() : Fragment() {
         binding.btnLogin.setOnClickListener {
             startActivity(intent)
             activity?.finish()
+            activity?.overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
     }
 }

@@ -23,9 +23,10 @@ class ExerciseSelectionAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ExerciseSelection) {
             binding.item = item
+            observeCheckBox()
         }
 
-        fun observeCheckBox() {
+        private fun observeCheckBox() {
             binding.cbSelectExercise.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     addExercise(adapterPosition)
@@ -47,7 +48,6 @@ class ExerciseSelectionAdapter(
 
     override fun onBindViewHolder(holder: ExerciseSelectionViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.observeCheckBox()
     }
 
     private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseSelection>() {

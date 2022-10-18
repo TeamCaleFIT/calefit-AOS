@@ -5,11 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.databinding.ItemExercisePlanBinding
+import com.example.calefit.ui.common.InputCategory
+import com.example.calefit.data.UserRecyclerviewClick
 
 class NestedOuterListViewAdapter(
     private val addCycle: (Int) -> Boolean,
     private val removeCycle: (Int) -> Boolean,
     private val removeExercise: (Int) -> Unit,
+    private val userSelect: (UserRecyclerviewClick) -> Unit,
+    private val showBottomSheet: (InputCategory) -> Unit,
 ) : ListAdapter<ExerciseList.Exercise, NestedOuterListViewAdapter.NestedOuterListViewViewHolder>(
     AsyncDifferConfig.Builder(ItemDiffUtil).build()
 ) {
@@ -21,21 +25,32 @@ class NestedOuterListViewAdapter(
         private val addCycle: (Int) -> Boolean,
         private val removeCycle: (Int) -> Boolean,
         private val removeExercise: (Int) -> Unit,
+        private val userSelect: (UserRecyclerviewClick) -> Unit,
+        private val showBottomSheet: (InputCategory) -> Unit,
         private val innerLayoutManager: LinearLayoutManager,
-        private val innerAdapter: NestedInnerListViewAdapter = NestedInnerListViewAdapter(),
         private val viewPool: RecyclerView.RecycledViewPool
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(item: ExerciseList.Exercise) {
             binding.item = item
+
+            val innerAdapter = NestedInnerListViewAdapter(
+                userClickPosition = UserRecyclerviewClick(adapterPosition),
+                userSelect = userSelect,
+                showBottomSheet = showBottomSheet
+            )
+
             binding.rvExerciseCycle.apply {
                 adapter = innerAdapter
                 layoutManager = innerLayoutManager
                 setRecycledViewPool(viewPool)
             }
             innerAdapter.submitList(item.cycleList)
+
+            observeInnerRecyclerView()
         }
 
-        fun observeInnerRecyclerView() {
+        private fun observeInnerRecyclerView() {
             with(binding) {
                 btnCycleAdd.setOnClickListener {
                     btnCycleDelete.isEnabled = addCycle(adapterPosition)
@@ -64,6 +79,8 @@ class NestedOuterListViewAdapter(
             addCycle = addCycle,
             removeCycle = removeCycle,
             removeExercise = removeExercise,
+            userSelect = userSelect,
+            showBottomSheet = showBottomSheet,
             innerLayoutManager = layoutManager,
             viewPool = viewPool,
         )
@@ -71,7 +88,6 @@ class NestedOuterListViewAdapter(
 
     override fun onBindViewHolder(holder: NestedOuterListViewViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.observeInnerRecyclerView()
     }
 
     private object ItemDiffUtil : DiffUtil.ItemCallback<ExerciseList.Exercise>() {
