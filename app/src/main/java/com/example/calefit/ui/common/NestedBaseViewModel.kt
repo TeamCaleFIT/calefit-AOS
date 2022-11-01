@@ -16,11 +16,11 @@ open class NestedRecyclerBaseViewModel(
     ),
 ) : ViewModel() {
 
-    protected val exercisePlan = _exercisePlan.asStateFlow()
+    val exercisePlan = _exercisePlan.asStateFlow()
 
     private lateinit var _userInput: UserRecyclerviewClick
 
-    protected fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>) {
+    fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>) {
         if (selectedExerciseList.isEmpty()) {
             return
         }
@@ -39,7 +39,7 @@ open class NestedRecyclerBaseViewModel(
         }
     }
 
-    protected fun addAdditionalCycle(position: Int): Boolean {
+    fun addAdditionalCycle(position: Int): Boolean {
         _exercisePlan.update { currentList ->
             val exerciseList = currentList.list.toMutableList()
             val targetExercise = exerciseList[position]
@@ -59,7 +59,7 @@ open class NestedRecyclerBaseViewModel(
         return true
     }
 
-    protected fun removeExercise(position: Int) {
+    fun removeExercise(position: Int) {
         if (exercisePlan.value.list.isEmpty()) {
             return
         }
@@ -71,7 +71,7 @@ open class NestedRecyclerBaseViewModel(
         }
     }
 
-    protected fun removeCycle(position: Int): Boolean {
+    fun removeCycle(position: Int): Boolean {
         if (exercisePlan.value.list[position].cycleList.size <= 1) {
             return false
         }
@@ -89,11 +89,11 @@ open class NestedRecyclerBaseViewModel(
         return exercisePlan.value.list[position].cycleList.size > 1
     }
 
-    protected fun setCurrentAdapterPositions(userClickPosition: UserRecyclerviewClick) {
+    fun setCurrentAdapterPositions(userClickPosition: UserRecyclerviewClick) {
         _userInput = userClickPosition
     }
 
-    protected fun setUserSelectedNumber(number: Int) {
+    fun setUserSelectedNumber(number: Int) {
         if (number == 0) {
             return
         }
