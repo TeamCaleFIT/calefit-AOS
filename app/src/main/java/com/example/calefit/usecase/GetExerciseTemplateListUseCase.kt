@@ -1,7 +1,6 @@
 package com.example.calefit.usecase
 
 import com.example.calefit.data.Aggregate
-import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseTemplateSummary
 import com.example.calefit.repository.ExerciseRepository
 import java.util.*
@@ -11,7 +10,7 @@ class GetExerciseTemplateListUseCase @Inject constructor(
     private val repository: ExerciseRepository
 ) {
     operator fun invoke(): Aggregate<List<ExerciseTemplateSummary>> {
-        return when (val rawData = repository.getExerciseDataFromRepository()) {
+        return when (val rawData = repository.getExerciseDataFromRoom()) {
             is Aggregate.Success -> {
                 val templateList = mutableListOf<ExerciseTemplateSummary>()
                 rawData.data.forEach { map ->

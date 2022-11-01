@@ -77,9 +77,11 @@ class ExerciseRepositoryImpl @Inject constructor(
     )
 
     //TODO when use server this code will changed to call datasource
-    override fun getExerciseDataFromRepository(): Aggregate<HashMap<String, ExerciseList>> {
+    override fun getExerciseDataFromRoom(): Aggregate<HashMap<String, ExerciseList>> {
 
         //TODO return Aggregate Fail if datasource has no data from the datasource
+
+
 
         if (_exerciseHashMap.isNotEmpty()) {
             return Aggregate.Success(_exerciseHashMap)

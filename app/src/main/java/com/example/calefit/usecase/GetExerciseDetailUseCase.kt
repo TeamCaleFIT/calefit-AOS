@@ -9,7 +9,7 @@ class GetExerciseDetailUseCase @Inject constructor(
     private val repository: ExerciseRepository
 ) {
     operator fun invoke(): Aggregate<HashMap<String, List<ExerciseDailyDetail>>> {
-        return when (val rawData = repository.getExerciseDataFromRepository()) {
+        return when (val rawData = repository.getExerciseDataFromRoom()) {
             is Aggregate.Success -> {
                 val map: HashMap<String, List<ExerciseDailyDetail>> = hashMapOf()
                 rawData.data.forEach {

@@ -8,7 +8,7 @@ class GetExercisePlannedDateListUseCase @Inject constructor(
     private val repository: ExerciseRepository
 ) {
     operator fun invoke(): Aggregate<HashMap<String, Boolean>> {
-        return when (val rawData = repository.getExerciseDataFromRepository()) {
+        return when (val rawData = repository.getExerciseDataFromRoom()) {
             is Aggregate.Success -> {
                 val resultMap: HashMap<String, Boolean> = hashMapOf()
                 rawData.data.forEach { exerciseList ->

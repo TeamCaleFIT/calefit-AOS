@@ -9,7 +9,7 @@ class GetSpecificDateExerciseListOrEmptyListUseCase @Inject constructor(
     private val repository: ExerciseRepository
 ) {
     operator fun invoke(date: String): Aggregate<ExerciseList> {
-        return when (val rawData = repository.getExerciseDataFromRepository()) {
+        return when (val rawData = repository.getExerciseDataFromRoom()) {
             is Aggregate.Success -> {
                 val result = rawData.data[date]
                 if (result == null) {
