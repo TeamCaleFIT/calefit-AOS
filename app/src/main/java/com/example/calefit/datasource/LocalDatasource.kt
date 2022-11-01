@@ -8,7 +8,9 @@ interface LocalDatasource {
 
     fun getExerciseList(): Flow<List<LocalExerciseListModel>>
 
-    fun getSpecificExerciseList(date: String): LocalExerciseListModel
+    fun getSpecificExerciseList(date: String): Flow<LocalExerciseListModel>
 
     fun getTemplate(): Flow<List<LocalExerciseTemplateModel>>
+
+    suspend fun replaceExerciseList(data: LocalExerciseListModel)
 }
