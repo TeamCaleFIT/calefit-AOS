@@ -14,10 +14,10 @@ interface ExerciseDao {
     suspend fun insertExercise(value: LocalExerciseListModel)
 
     @Query("SELECT * FROM exercise")
-    fun observeExerciseList(): Flow<List<LocalExerciseListModel>>
+    fun getAllExerciseList(): Flow<List<LocalExerciseListModel>>
 
     @Query("SELECT * FROM exercise WHERE date = :selectedDate")
-    suspend fun getSpecificExerciseList(selectedDate: String): LocalExerciseListModel
+    fun getSpecificExerciseList(selectedDate: String): Flow<LocalExerciseListModel>
 
     @Query("SELECT * FROM exercise WHERE date BETWEEN :start And :end")
     fun getYearExerciseList(start: String, end: String): Flow<List<LocalExerciseListModel>>
