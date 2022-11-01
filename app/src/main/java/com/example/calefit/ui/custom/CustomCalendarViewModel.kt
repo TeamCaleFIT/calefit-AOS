@@ -110,7 +110,6 @@ class CustomCalendarViewModel @Inject constructor(
         val selectedYear = selectedDate.year
         val selectedMonth = selectedDate.month.value
         val formatter = context.getString(R.string.year_month_day_format)
-
         val dayList = mutableListOf<CalendarDate>()
 
         for (i in 1..42) {

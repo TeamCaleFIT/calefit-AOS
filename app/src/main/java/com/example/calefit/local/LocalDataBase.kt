@@ -12,6 +12,7 @@ import com.example.calefit.data.localdto.LocalExerciseTemplateModel
     entities = [LocalExerciseListModel::class, LocalExerciseTemplateModel::class],
     version = 1
 )
+
 @TypeConverters(Converters::class)
 abstract class LocalDataBase : RoomDatabase() {
 
