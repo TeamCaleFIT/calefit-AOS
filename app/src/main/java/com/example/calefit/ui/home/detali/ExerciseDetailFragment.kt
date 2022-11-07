@@ -20,7 +20,7 @@ import com.example.calefit.databinding.FragmentExerciseDetailBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.decoration.NestedRecyclerDecoration
-import com.example.calefit.ui.common.NumberPickFragment
+import com.example.calefit.ui.home.planner.NumberPickFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
@@ -51,7 +51,7 @@ class ExerciseDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        args.templateDate.let { viewModel.setExerciseByDate(it) }
+        args.templateDate.let { viewModel.setExerciseByTemplateName(it) }
     }
 
     override fun onCreateView(
@@ -78,6 +78,7 @@ class ExerciseDetailFragment : Fragment() {
         goToExerciseSelectFragment(navController)
         observeSelectionFragmentResult(navController)
         getDataFromBottomSheetFragment()
+        saveTemplate()
     }
 
     private fun startBottomSheetFragment(category: InputCategory) {
@@ -116,6 +117,21 @@ class ExerciseDetailFragment : Fragment() {
             }?.onCompletion {
                 Log.d("DetailFragment", "done : for the flow")
             }?.collect()
+        }
+    }
+
+    private fun saveTemplate() {
+        if (viewModel.exercisePlan.value.list.isEmpty()) {
+            return
+        }
+
+        binding.btnSaveExerciseTemplate.setOnClickListener {
+            viewModel.saveTemplate()
+            val data =
+                ExerciseDetailFragmentDirections.actionExerciseDetailFragmentToTemplateFragment(
+                    viewModel.getLoadDataInfo()
+                )
+            findNavController().navigate(data)
         }
     }
 
