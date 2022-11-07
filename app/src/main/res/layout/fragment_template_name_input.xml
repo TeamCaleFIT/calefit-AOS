@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_template_title_input"
+            style="@style/ExerciseListBody"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/template_name_input_by_user"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/view_template_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_template_padding"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toTopOf="@id/et_template_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_template_title_input" />
+
+        <EditText
+            android:id="@+id/et_template_title"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/template_name_hint"
+            app:layout_constraintBottom_toTopOf="@id/view_template_padding2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_template_padding" />
+
+        <View
+            android:id="@+id/view_template_padding2"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_save_template_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_template_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_save_template_name"
+            style="@style/ExerciseListBody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/planner_button_background"
+            android:text="@string/save_template_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_cancel_template_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_template_padding2" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_cancel_template_name"
+            style="@style/ExerciseListBody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/planner_button_background"
+            android:text="@string/cancel_template_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_save_template_name"
+            app:layout_constraintTop_toBottomOf="@id/view_template_padding2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
