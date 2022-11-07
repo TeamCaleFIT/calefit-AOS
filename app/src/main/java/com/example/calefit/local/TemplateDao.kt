@@ -16,6 +16,9 @@ interface TemplateDao {
     @Query("SELECT * FROM template")
     fun getAllTemplates(): Flow<List<LocalExerciseTemplateModel>>
 
+    @Query("SELECT * FROM template WHERE templateName = :templateName")
+    fun getSpecificTemplate(templateName: String): Flow<LocalExerciseTemplateModel>
+
     @Query("DELETE FROM template WHERE templateName = :templateName")
     suspend fun deleteWorkOutData(templateName: String): Int
 }
