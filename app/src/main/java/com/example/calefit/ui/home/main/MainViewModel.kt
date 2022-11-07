@@ -1,49 +1,47 @@
 package com.example.calefit.ui.home.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.calefit.data.Aggregate
-import com.example.calefit.data.ExerciseList
+import androidx.lifecycle.viewModelScope
+import com.example.calefit.data.ExerciseDailyDetail
 import com.example.calefit.usecase.GetExerciseDetailUseCase
-import com.example.calefit.usecase.GetSpecificDateExerciseListOrEmptyListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    getExerciseDetailUseCase: GetExerciseDetailUseCase,
+    private val getExerciseDetailUseCase: GetExerciseDetailUseCase,
 ) : ViewModel() {
+
+    init {
+        getData()
+    }
 
     private val _clickedDate = MutableStateFlow("")
     val clickedDate = _clickedDate.asStateFlow()
 
     private val _exerciseList = MutableStateFlow(
-        getExerciseDetailUseCase()
+        hashMapOf<String, List<ExerciseDailyDetail>>()
     )
 
-    val exerciseMap = _exerciseList.map {
-        when (it) {
-            is Aggregate.Success -> {
-                dataLoading.value = false
-                it.data
-            }
-            is Aggregate.Error -> {
-                dataLoading.value = false
-                emptyMap()
-            }
-            is Aggregate.Loading -> {
-                dataLoading.value = true
-                emptyMap()
-            }
-        }
-    }
+    val exerciseMap = _exerciseList.asStateFlow()
 
     val dataLoading = MutableStateFlow(false)
 
     fun setDate(date: String) {
         require(date.isNotEmpty())
         _clickedDate.value = date
+        Log.d("MainViewModel", "date : ${_clickedDate.value}")
+    }
+
+    private fun getData() {
+        viewModelScope.launch {
+            getExerciseDetailUseCase().collect {
+                _exerciseList.value = it
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.calefit.data
 
+import com.example.calefit.data.localdto.LocalExerciseListModel
 import kotlinx.serialization.Serializable
 
 data class ExerciseList(
@@ -21,6 +22,12 @@ data class ExerciseList(
         val cycle: Int,
         val weight: Int,
     ) : java.io.Serializable
+
+    fun toLocalModel() = LocalExerciseListModel(
+        list = this.list,
+        templateName = this.templateName,
+        date = this.date
+    )
 
     companion object {
         val DEFAULT_CYCLE_LIST = listOf(

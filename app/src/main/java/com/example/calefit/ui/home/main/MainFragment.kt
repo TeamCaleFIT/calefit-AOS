@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
+import com.example.calefit.data.DataLoadInfo
 import com.example.calefit.databinding.FragmentMainBinding
 import com.example.calefit.ui.adapter.ExerciseDailyDetailListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,14 +80,25 @@ class MainFragment : Fragment() {
     private fun goToPlannerFragment(navController: NavController) {
         with(binding) {
             btnMakeExerciseList.setOnClickListener {
-                navController.navigate(R.id.action_mainFragment_to_plannerFragment)
+                viewLifecycleOwner.repeatOnLifecycleExtension {
+                    viewModel.clickedDate.collect {
+                        val date = MainFragmentDirections.actionMainFragmentToPlannerFragment(
+                            DataLoadInfo(
+                                initialClickedDate = it
+                            )
+                        )
+                        navController.navigate(date)
+                    }
+                }
             }
 
             btnEditExercise.setOnClickListener {
                 viewLifecycleOwner.repeatOnLifecycleExtension {
                     viewModel.clickedDate.collect {
                         val data = MainFragmentDirections.actionMainFragmentToPlannerFragment(
-                            it
+                            DataLoadInfo(
+                                initialClickedDate = it
+                            )
                         )
                         navController.navigate(data)
                     }

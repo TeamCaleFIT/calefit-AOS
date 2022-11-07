@@ -23,7 +23,6 @@ class CalendarAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: CalendarDate.ItemDays) {
             binding.item = item
-
             binding.clDay.setOnClickListener {
                 clickEvent(adapterPosition)
             }

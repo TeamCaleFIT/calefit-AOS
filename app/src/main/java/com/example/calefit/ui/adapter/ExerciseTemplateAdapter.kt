@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,8 +13,6 @@ import com.example.calefit.R
 import com.example.calefit.data.ExerciseTemplateSummary
 import com.example.calefit.databinding.ItemExerciseTemplateBinding
 import com.example.calefit.ui.home.template.TemplateFragmentDirections
-import dagger.hilt.android.qualifiers.ApplicationContext
-import java.util.zip.Inflater
 
 class ExerciseTemplateAdapter(
     private val context: Context?,
@@ -50,7 +47,7 @@ class ExerciseTemplateAdapter(
             binding.btnExerciseListDetail.setOnClickListener {
                 val data =
                     TemplateFragmentDirections.actionTemplateFragmentToExerciseDetailFragment(
-                        item.exerciseDate
+                        item.templateTitle
                     )
                 navController.navigate(data)
             }

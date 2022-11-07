@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.common.repeatOnLifecycleExtension
@@ -26,8 +26,15 @@ class TemplateFragment : Fragment() {
 
     private lateinit var templateAdapter: ExerciseTemplateAdapter
 
+    private val args: TemplateFragmentArgs by navArgs<TemplateFragmentArgs>()
+
     private val recyclerDecoration by lazy {
         NestedRecyclerDecoration(NestedRecyclerDecoration.DEFAULT_INNER_RECYCLER_VIEW_ITEM_PADDING)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setDataLoadInfo(args.item)
     }
 
     override fun onCreateView(
@@ -67,7 +74,7 @@ class TemplateFragment : Fragment() {
     private fun selectExerciseTemplateToPlanning() {
         binding.btnSelectExerciseTemplate.setOnClickListener {
             val data = TemplateFragmentDirections.actionTemplateFragmentToPlannerFragment(
-                viewModel.getSelectedDate()
+                viewModel.getLoadDataInfo()
             )
             findNavController().navigate(data)
         }

@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toBottomOf="@id/til_search"
                 tools:listitem="@layout/item_exercise_select" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/btn_exercise_select"
                 style="@style/ExercisePlanBody"
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/template_background"
+                android:backgroundTint="@color/gray3"
                 android:gravity="center|center_vertical"
                 android:padding="5dp"
                 android:text="@string/select_exercise"

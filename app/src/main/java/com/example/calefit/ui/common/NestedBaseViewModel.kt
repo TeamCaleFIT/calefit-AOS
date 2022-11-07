@@ -1,31 +1,35 @@
 package com.example.calefit.ui.common
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.calefit.data.DataLoadInfo
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.data.ExerciseSelection
 import com.example.calefit.data.UserRecyclerviewClick
-import com.example.calefit.ui.home.planner.PlannerViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-open class NestedRecyclerBaseViewModel(
-    protected val _exercisePlan: MutableStateFlow<ExerciseList> = MutableStateFlow(
-        ExerciseList()
-    ),
-) : ViewModel() {
+open class NestedRecyclerBaseViewModel : ViewModel() {
 
-    protected val exercisePlan = _exercisePlan.asStateFlow()
+    protected val exerciseLists: MutableStateFlow<ExerciseList> = MutableStateFlow(
+        ExerciseList()
+    )
+    val exercisePlan = exerciseLists.asStateFlow()
+
+    val dataLoading = MutableStateFlow(false)
 
     private lateinit var _userInput: UserRecyclerviewClick
 
-    protected fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>) {
+    protected var selectedDate = MutableStateFlow("")
+
+    protected var dataLoadInfo = DataLoadInfo()
+
+    fun addAdditionalExercise(selectedExerciseList: List<ExerciseSelection>) {
         if (selectedExerciseList.isEmpty()) {
             return
         }
 
-        _exercisePlan.update { currentList ->
+        exerciseLists.update { currentList ->
             val newList = currentList.list.toMutableList()
             selectedExerciseList.forEach { selectedExercise ->
                 newList.add(
@@ -39,8 +43,8 @@ open class NestedRecyclerBaseViewModel(
         }
     }
 
-    protected fun addAdditionalCycle(position: Int): Boolean {
-        _exercisePlan.update { currentList ->
+    fun addAdditionalCycle(position: Int): Boolean {
+        exerciseLists.update { currentList ->
             val exerciseList = currentList.list.toMutableList()
             val targetExercise = exerciseList[position]
             val newCycleList = targetExercise.cycleList.toMutableList()
@@ -59,24 +63,24 @@ open class NestedRecyclerBaseViewModel(
         return true
     }
 
-    protected fun removeExercise(position: Int) {
+    fun removeExercise(position: Int) {
         if (exercisePlan.value.list.isEmpty()) {
             return
         }
 
-        _exercisePlan.update { currentList ->
+        exerciseLists.update { currentList ->
             val newList = currentList.list.toMutableList()
             newList.removeAt(position)
             currentList.copy(list = newList)
         }
     }
 
-    protected fun removeCycle(position: Int): Boolean {
+    fun removeCycle(position: Int): Boolean {
         if (exercisePlan.value.list[position].cycleList.size <= 1) {
             return false
         }
 
-        _exercisePlan.update { currentList ->
+        exerciseLists.update { currentList ->
             val exerciseList = currentList.list.toMutableList()
             val targetExercise = exerciseList[position]
             val newCycleList = targetExercise.cycleList.toMutableList()
@@ -89,16 +93,16 @@ open class NestedRecyclerBaseViewModel(
         return exercisePlan.value.list[position].cycleList.size > 1
     }
 
-    protected fun setCurrentAdapterPositions(userClickPosition: UserRecyclerviewClick) {
+    fun setCurrentAdapterPositions(userClickPosition: UserRecyclerviewClick) {
         _userInput = userClickPosition
     }
 
-    protected fun setUserSelectedNumber(number: Int) {
+    fun setUserSelectedNumber(number: Int) {
         if (number == 0) {
             return
         }
 
-        _exercisePlan.update { currentList ->
+        exerciseLists.update { currentList ->
             val exerciseList = currentList.list.toMutableList()
             val exercise = exerciseList[_userInput.outerPosition]
             val setList = exercise.cycleList.toMutableList()
@@ -117,6 +121,8 @@ open class NestedRecyclerBaseViewModel(
             currentList.copy(list = exerciseList)
         }
     }
+
+    fun getLoadDataInfo() = dataLoadInfo
 
     companion object {
         private const val DEFAULT_CYCLE_VALUE = 0
