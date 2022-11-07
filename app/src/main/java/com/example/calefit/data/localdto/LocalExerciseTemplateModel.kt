@@ -11,8 +11,19 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class LocalExerciseTemplateModel(
 
-    @ColumnInfo(name = "Exercise")
+    @ColumnInfo(name = "exercise")
     var list: List<ExerciseList.Exercise> = emptyList(),
+    @ColumnInfo(name = "date")
+    var date: String = "",
     @PrimaryKey @ColumnInfo(name = "templateName")
     var templateName: String = ""
-)
+) {
+    companion object {
+        fun from(exerciseList: ExerciseList, date: String, templateName: String) =
+            LocalExerciseTemplateModel(
+                list = exerciseList.list,
+                date = date,
+                templateName = templateName
+            )
+    }
+}
