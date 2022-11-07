@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.template.TemplateFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.example.calefit.ui.custom.AutoClearRecyclerView
             android:id="@+id/rv_exercise_template"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -26,7 +26,7 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_exercise_template" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <Button
             android:id="@+id/btn_select_exercise_template"
             style="@style/ExerciseListBody"
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/extra_button_background"
+            android:backgroundTint="@color/gray1"
             android:gravity="center|center_vertical"
             android:padding="5dp"
             android:text="@string/select_data"

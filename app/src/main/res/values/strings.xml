@@ -73,5 +73,9 @@
     <string name="select_data">선택하기</string>
     <string name="template_exercise_count">운동종목 %d개</string>
     <string name="save_exercise">저장하기</string>
+    <string name="save_template_title">저장하기</string>
+    <string name="cancel_template_save">취소하기</string>
+    <string name="template_name_hint">템플릿 이름</string>
+    <string name="template_name_input_by_user">템플릿 이름을 입력해 주세요</string>
 
 </resources>
