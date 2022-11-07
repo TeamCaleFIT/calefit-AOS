@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.example.calefit.data.ExerciseList
+import com.example.calefit.data.UserRecyclerviewClick
 import com.example.calefit.databinding.ItemExercisePlanBinding
 import com.example.calefit.ui.common.InputCategory
-import com.example.calefit.data.UserRecyclerviewClick
 
 class NestedOuterListViewAdapter(
     private val addCycle: (Int) -> Boolean,

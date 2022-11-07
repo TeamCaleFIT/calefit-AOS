@@ -1,6 +1,5 @@
 package com.example.calefit.ui.home.planner
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.calefit.data.DataLoadInfo
 import com.example.calefit.data.ExerciseList
@@ -10,7 +9,6 @@ import com.example.calefit.usecase.GetSpecificDateExerciseListOrEmptyListUseCase
 import com.example.calefit.usecase.InsertExerciseListUseCase
 import com.example.calefit.usecase.InsertExerciseTemplateListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

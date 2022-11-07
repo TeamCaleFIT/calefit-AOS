@@ -1,15 +1,11 @@
 package com.example.calefit.ui.home.detali
 
 import androidx.lifecycle.viewModelScope
-import com.example.calefit.data.Aggregate
 import com.example.calefit.data.ExerciseList
 import com.example.calefit.ui.common.NestedRecyclerBaseViewModel
 import com.example.calefit.usecase.GetExerciseListFromTemplateUseCase
-import com.example.calefit.usecase.GetSpecificDateExerciseListOrEmptyListUseCase
 import com.example.calefit.usecase.InsertExerciseTemplateListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
