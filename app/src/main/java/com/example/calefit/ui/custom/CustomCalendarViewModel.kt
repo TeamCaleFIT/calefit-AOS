@@ -2,6 +2,7 @@ package com.example.calefit.ui.custom
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.calefit.R
 import com.example.calefit.data.Aggregate
 import com.example.calefit.data.CalendarDate
@@ -10,7 +11,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
@@ -19,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CustomCalendarViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    getExercisePlannedDateListUseCase: GetExercisePlannedDateListUseCase
+    private val getExercisePlannedDateListUseCase: GetExercisePlannedDateListUseCase
 ) : ViewModel() {
 
     private val _todayDate = LocalDate.now()
@@ -39,22 +42,10 @@ class CustomCalendarViewModel @Inject constructor(
 
     var clickedDate = ""
 
-    private val _exerciseDateMap = getExercisePlannedDateListUseCase().let {
-        when (it) {
-            is Aggregate.Success -> {
-                it.data
-            }
-            is Aggregate.Error -> {
-                emptyMap()
-            }
-            is Aggregate.Loading -> {
-                emptyMap()
-            }
-        }
-    }
+    private val _exerciseDateMap = MutableStateFlow(hashMapOf<String, Boolean>())
 
     init {
-        makeCalendar()
+        getData()
     }
 
     fun changeDateBackground(position: Int) {
@@ -125,7 +116,7 @@ class CustomCalendarViewModel @Inject constructor(
                 val day = (i - dayOfWeek).toString()
                 val date = formatter.format(selectedYear, selectedMonth, day.toInt())
 
-                if (_exerciseDateMap.isNotEmpty() && _exerciseDateMap.containsKey(date)) {
+                if (_exerciseDateMap.value.containsKey(date)) {
                     dayList.add(
                         CalendarDate.ItemDays(
                             id = i,
@@ -160,5 +151,14 @@ class CustomCalendarViewModel @Inject constructor(
     private fun setMonthToString() {
         val formatter = DateTimeFormatter.ofPattern("MM월")
         _monthName.value = _selectedDate.format(formatter)
+    }
+
+    private fun getData() {
+        viewModelScope.launch {
+            getExercisePlannedDateListUseCase().collect {
+                _exerciseDateMap.value = it
+                makeCalendar()
+            }
+        }
     }
 }
