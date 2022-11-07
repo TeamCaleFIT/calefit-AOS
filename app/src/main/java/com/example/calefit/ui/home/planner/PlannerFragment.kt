@@ -20,7 +20,6 @@ import com.example.calefit.databinding.FragmentPlannerBinding
 import com.example.calefit.ui.adapter.NestedOuterListViewAdapter
 import com.example.calefit.ui.common.InputCategory
 import com.example.calefit.ui.decoration.NestedRecyclerDecoration
-import com.example.calefit.ui.common.NumberPickFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
@@ -51,7 +50,7 @@ class PlannerFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.setExerciseList(args.itemDate)
+        viewModel.setData(args.item)
     }
 
     override fun onCreateView(
@@ -79,6 +78,9 @@ class PlannerFragment : Fragment() {
         goToTemplateFragment(navController)
         getDataFromBottomSheetFragment()
         observeData()
+        saveExerciseList()
+        saveAsTemplate()
+        getTemplateFromDialog()
     }
 
     private fun selectExercise(navController: NavController) {
@@ -122,7 +124,49 @@ class PlannerFragment : Fragment() {
 
     private fun goToTemplateFragment(navController: NavController) {
         binding.btnLoadExerciseTemplateList.setOnClickListener {
-            navController.navigate(R.id.action_plannerFragment_to_templateFragment)
+            val data = PlannerFragmentDirections.actionPlannerFragmentToTemplateFragment(
+                viewModel.getLoadDataInfo()
+            )
+            navController.navigate(data)
+        }
+    }
+
+    private fun saveExerciseList() {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.exercisePlan.collect {
+                if (it.list.isEmpty()) {
+                    return@collect
+                }
+
+                binding.btnSaveExercise.setOnClickListener {
+                    viewModel.saveExerciseList()
+                    findNavController().navigate(R.id.action_plannerFragment_to_mainFragment)
+                }
+            }
+        }
+    }
+
+    private fun saveAsTemplate() {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.exercisePlan.collect {
+                if (it.list.isEmpty()) {
+                    return@collect
+                }
+
+                binding.btnSaveAsTemplate.setOnClickListener {
+                    TemplateNameInputDialogFragment().show(
+                        parentFragmentManager,
+                        "template_name_input_fragment"
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getTemplateFromDialog() {
+        setFragmentResultListener("request_key2") { _, bundle ->
+            val templateName = bundle.getString("templateName")
+            viewModel.saveTemplateList(templateName)
         }
     }
 
