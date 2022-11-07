@@ -12,5 +12,7 @@ interface LocalDatasource {
 
     fun getTemplate(): Flow<List<LocalExerciseTemplateModel>>
 
-    suspend fun replaceExerciseList(data: LocalExerciseListModel)
+    suspend fun insertExerciseList(data: LocalExerciseListModel)
+
+    suspend fun insertExerciseTemplate(data: LocalExerciseTemplateModel)
 }

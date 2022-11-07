@@ -15,12 +15,16 @@ class LocalDatasourceImpl @Inject constructor(
         exerciseDao.getAllExerciseList()
 
     override fun getSpecificExerciseList(date: String): Flow<LocalExerciseListModel> =
-        exerciseDao.getSpecificExerciseList(date)
+        exerciseDao.getSpecificExerciseListByDate(date)
 
     override fun getTemplate(): Flow<List<LocalExerciseTemplateModel>> =
         templateDao.getAllTemplates()
 
-    override suspend fun replaceExerciseList(data: LocalExerciseListModel) {
+    override suspend fun insertExerciseList(data: LocalExerciseListModel) {
         exerciseDao.insertExercise(data)
+    }
+
+    override suspend fun insertExerciseTemplate(data: LocalExerciseTemplateModel) {
+        templateDao.insertTemplate(data)
     }
 }
