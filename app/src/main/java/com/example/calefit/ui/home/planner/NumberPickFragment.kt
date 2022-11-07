@@ -1,4 +1,4 @@
-package com.example.calefit.ui.common
+package com.example.calefit.ui.home.planner
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.fragment.app.setFragmentResult
 import com.example.calefit.R
 import com.example.calefit.common.autoCleared
 import com.example.calefit.databinding.FragmentNumberPickBinding
+import com.example.calefit.ui.common.InputCategory
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
