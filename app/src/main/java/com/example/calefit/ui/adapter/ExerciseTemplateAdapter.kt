@@ -50,7 +50,7 @@ class ExerciseTemplateAdapter(
             binding.btnExerciseListDetail.setOnClickListener {
                 val data =
                     TemplateFragmentDirections.actionTemplateFragmentToExerciseDetailFragment(
-                        item.exerciseDate
+                        item.templateTitle
                     )
                 navController.navigate(data)
             }

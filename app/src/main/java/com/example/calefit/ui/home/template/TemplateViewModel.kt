@@ -1,13 +1,14 @@
 package com.example.calefit.ui.home.template
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.calefit.data.Aggregate
+import com.example.calefit.data.DataLoadInfo
 import com.example.calefit.data.ExerciseTemplateSummary
 import com.example.calefit.usecase.GetExerciseTemplateListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,27 +20,24 @@ class TemplateViewModel @Inject constructor(
     private val _templateSummaryList: MutableStateFlow<List<ExerciseTemplateSummary>> =
         MutableStateFlow(listOf())
 
+    private var dataLoadInfo = DataLoadInfo()
+
     val templateSummaryList = _templateSummaryList.asStateFlow()
 
     val dataLoading = MutableStateFlow(false)
-
-    private var _selectedDate = ""
 
     init {
         getTemplateDataFromRepository()
     }
 
-    private lateinit var _selectedTemplate: ExerciseTemplateSummary
-
     fun selectTemplate(position: Int) {
-        _selectedTemplate = _templateSummaryList.value[position]
-
         _templateSummaryList.update { currentList ->
             val newList = mutableListOf<ExerciseTemplateSummary>()
             currentList.forEachIndexed { index, summary ->
                 if (index == position && !currentList[index].isClicked) {
                     newList.add(summary.copy(isClicked = true))
-                    _selectedDate = currentList[index].exerciseDate
+                    dataLoadInfo =
+                        dataLoadInfo.copy(templateName = currentList[index].templateTitle)
                 } else {
                     newList.add(summary.copy(isClicked = false))
                 }
@@ -48,21 +46,21 @@ class TemplateViewModel @Inject constructor(
         }
     }
 
-    fun getSelectedDate() = _selectedDate
+    fun setDataLoadInfo(data: DataLoadInfo) {
+        this.dataLoadInfo = data
+    }
+
+    fun getLoadDataInfo() = dataLoadInfo
 
     private fun getTemplateDataFromRepository() {
-        when (val data = getExerciseTemplateListUseCase()) {
-            is Aggregate.Success -> {
-                dataLoading.value = false
-                _templateSummaryList.value = data.data
-            }
-            is Aggregate.Error -> {
-                dataLoading.value = false
-                _templateSummaryList.value = emptyList()
-            }
-            is Aggregate.Loading -> {
-                dataLoading.value = true
-                _templateSummaryList.value = emptyList()
+        viewModelScope.launch {
+            getExerciseTemplateListUseCase().collect {
+                if (it.isEmpty()) {
+                    _templateSummaryList.value = emptyList()
+                    dataLoading.value = true
+                    return@collect
+                }
+                _templateSummaryList.value = it
             }
         }
     }
