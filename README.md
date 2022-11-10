@@ -12,7 +12,7 @@
 ## 📱Introduce
 <div align="center">
 
-|  <center>Login</center> |  <center>Calendar</center> |  <center>Exercise Register</center> |
+|  <center>Login View</center> |  <center>Exercise Calendar</center> |  <center>Exercise Registeration</center> |
 |:--------:|:--------:|:--------:|
 |<center><img src="https://media.discordapp.net/attachments/995917214257512478/1021781682048733275/Screen_Shot_2022-09-20_at_22.53.31.png" width="216" height="468"/></center> | <center><img src="https://media.discordapp.net/attachments/995917214257512478/1021781679980957696/Screen_Shot_2022-09-20_at_22.53.47.png" width="216" height="468"/></center> | <center><img src="https://media.discordapp.net/attachments/995917214257512478/1021781682707251330/Screen_Shot_2022-09-20_at_22.54.08.png" width="216" height="468"/></center>|
 
